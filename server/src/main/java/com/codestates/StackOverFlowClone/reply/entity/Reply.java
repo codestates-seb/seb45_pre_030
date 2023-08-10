@@ -10,10 +10,10 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +39,7 @@ public class Reply {
 
     @CreatedDate
     @Column(name = "reply_dttm", updatable = false)
-    private LocalDateTime replyDttm;
+    private LocalDateTime replyDttm = LocalDateTime.now();
 }
+
+
