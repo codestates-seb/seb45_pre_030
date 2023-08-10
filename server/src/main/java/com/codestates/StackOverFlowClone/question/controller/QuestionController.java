@@ -38,7 +38,6 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto requestBody){
 
-
         Question questionmapper = mapper.questionPostDtoToQuestion(requestBody);
 
         Question question = questionService.createQuestion(questionmapper);
@@ -46,6 +45,7 @@ public class QuestionController {
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
         return ResponseEntity.created(location).body(mapper.questionToQuestionResponseDto(question));
+
     }
 
     @PatchMapping("/{question-id}")
@@ -73,7 +73,6 @@ public class QuestionController {
                 , HttpStatus.OK);
     }
 
-    // 되는지 확인하고 페이징 테스트
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int size){
