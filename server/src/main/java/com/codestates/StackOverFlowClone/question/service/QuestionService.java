@@ -1,0 +1,75 @@
+package com.codestates.StackOverFlowClone.question.service;
+
+
+import com.codestates.StackOverFlowClone.question.entity.Question;
+import com.codestates.StackOverFlowClone.question.exception.BusinessLogicException;
+import com.codestates.StackOverFlowClone.question.exception.ExceptionCode;
+import com.codestates.StackOverFlowClone.question.repository.QuestionRepository;
+import com.codestates.StackOverFlowClone.utils.CustomBeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Transactional
+public class QuestionService {
+
+    private final QuestionRepository questionRepository;
+
+    private final CustomBeanUtils<Question> beanUtils;
+
+    public QuestionService(QuestionRepository questionRepository, CustomBeanUtils<Question> beanUtils){
+        this.questionRepository = questionRepository;
+        this.beanUtils = beanUtils;
+    }
+
+    public Question createQuestion(Question question){
+
+        return questionRepository.save(question);
+
+    }
+
+    public Question updateQuestion(Question question){
+
+        Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+
+        Question updatingQuestion =
+                beanUtils.copyNonNullProperties(question, findQuestion);
+
+        return questionRepository.save(findQuestion);
+    }
+
+    public Question findQuestion(long questionId){
+
+        return findVerifiedQuestion(questionId);
+    }
+
+    public Question findVerifiedQuestion(long questionId){
+
+        Optional<Question> optionalQuestion =
+                questionRepository.findById(questionId);
+
+        Question findQuestion =
+                optionalQuestion.orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOT_FOUND));
+
+        return findQuestion;
+    }
+
+    public Page<Question> findQuestions(int page, int size){
+
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").ascending()));
+
+    }
+
+    public void deleteQuestion(long questionId){
+
+        Question findQuestion = findQuestion(questionId);
+
+        questionRepository.delete(findQuestion);
+    }
+}
