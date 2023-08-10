@@ -3,7 +3,6 @@ package com.codestates.StackOverFlowClone.question.controller;
 
 import com.codestates.StackOverFlowClone.question.dto.QuestionPatchDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionPostDto;
-import com.codestates.StackOverFlowClone.question.dto.QuestionResponseDto;
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.question.mapper.QuestionMapper;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/question")

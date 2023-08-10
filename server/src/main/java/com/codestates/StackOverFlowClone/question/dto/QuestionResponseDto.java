@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -24,17 +22,6 @@ public class QuestionResponseDto {
 
     private String questionContent;
 
-    private LocalDateTime questionDttm;
-
-    private long questionReplyLimitCount;
-
-//    public void setMember(Member member){
-//        this.memberId = member.getMemberId();
-//    }
-//
-//    public void setCategory(Category category){
-//        this.categoryId = category.getCategoryId();
-//    }
-
+    private LocalDateTime questionDateTime;
 
 }
