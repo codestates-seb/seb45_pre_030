@@ -18,7 +18,4 @@ public class ReplyPostDto {
     @NotBlank
     private String content;
 
-    public void addQuestionId(long questionId) { this.questionId = questionId; }
-
-    public void addMemberId(long memberId) { this.memberId = memberId; }
 }

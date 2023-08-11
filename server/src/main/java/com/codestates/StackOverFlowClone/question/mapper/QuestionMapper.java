@@ -11,7 +11,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-
     Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
     Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);

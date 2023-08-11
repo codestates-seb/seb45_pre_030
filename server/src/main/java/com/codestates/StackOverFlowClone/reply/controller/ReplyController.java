@@ -39,7 +39,7 @@ public class ReplyController {
         URI location = UriComponentsBuilder
                 .newInstance()
                 .path(REPLY_DEFAULT_URL + "/{reply-id}")
-                .buildAndExpand(questionId, reply.getReplyId())
+                .buildAndExpand(questionId, createdReply.getReplyId())
                 .toUri();
 
         return ResponseEntity.created(location).build();

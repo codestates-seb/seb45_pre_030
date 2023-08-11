@@ -1,8 +1,7 @@
 package com.codestates.StackOverFlowClone.reply.service;
 
 import com.codestates.StackOverFlowClone.question.entity.Question;
-import com.codestates.StackOverFlowClone.question.exception.BusinessLogicException;
-import com.codestates.StackOverFlowClone.question.exception.ExceptionCode;
+
 import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import com.codestates.StackOverFlowClone.reply.repository.ReplyRepository;
@@ -67,6 +66,6 @@ public class ReplyService {
     }
 
     public void verifyReply(Reply reply) {
-        questionService.findVerifiedQuestion(reply.getQuestionId());
+        questionService.findQuestion(reply.getQuestionId());
     }
 }
