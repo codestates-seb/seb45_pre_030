@@ -3,6 +3,7 @@ package com.codestates.StackOverFlowClone.reply.service;
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.question.exception.BusinessLogicException;
 import com.codestates.StackOverFlowClone.question.exception.ExceptionCode;
+import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import com.codestates.StackOverFlowClone.reply.repository.ReplyRepository;
 import com.codestates.StackOverFlowClone.utils.CustomBeanUtils;
@@ -14,15 +15,19 @@ import java.util.Optional;
 @Service
 public class ReplyService {
     private final ReplyRepository replyRepository;
+    private final QuestionService questionService;
     private final CustomBeanUtils<Reply> beanUtils;
 
-    public ReplyService(ReplyRepository replyRepository,CustomBeanUtils<Reply> beanUtils) {
+    public ReplyService(ReplyRepository replyRepository,
+                        QuestionService questionService,
+                        CustomBeanUtils<Reply> beanUtils) {
         this.replyRepository = replyRepository;
+        this.questionService = questionService;
         this.beanUtils = beanUtils;
     }
 
     public Reply createReply(Reply reply) {
-
+        verifyReply(reply);
         return replyRepository.save(reply);
     }
 
@@ -43,6 +48,10 @@ public class ReplyService {
         return replyRepository.findAll();
     }
 
+    public List<Reply> findQuestionReplies(long questionId) {
+        return replyRepository.findAllByQuestionId(questionId);
+    }
+
     public void deleteReply(long replyId) {
         Reply reply = findVerifiedReply(replyId);
         replyRepository.delete(reply);
@@ -52,8 +61,12 @@ public class ReplyService {
         Optional<Reply> optionalReply =
                 replyRepository.findById(replyId);
         Reply findReply =
-                optionalReply.orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOT_FOUND));
+                optionalReply.orElseThrow(() -> new RuntimeException());
 
         return findReply;
+    }
+
+    public void verifyReply(Reply reply) {
+        questionService.findVerifiedQuestion(reply.getQuestionId());
     }
 }

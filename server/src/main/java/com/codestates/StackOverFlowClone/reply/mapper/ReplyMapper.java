@@ -14,11 +14,8 @@ import java.util.List;
 public interface ReplyMapper {
 
     Reply ReplyPostDtoToReply(ReplyPostDto replyPostDto);
-
     Reply ReplyPatchDtoToReply(ReplyPatchDto replyPatchDto);
-
     ReplyResponseDto ReplyToReplyResponseDto(Reply reply);
-
     List<ReplyResponseDto> RepliesToReplyResponseDtos(List<Reply> replies);
 /*
     @Override

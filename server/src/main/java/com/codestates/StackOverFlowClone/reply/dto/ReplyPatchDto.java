@@ -15,8 +15,11 @@ public class ReplyPatchDto {
 
     private long replyId;
 
+    private long questionId;
+
+    private long memberId;
+
     @NotBlank
     private String content;
 
-    public void setReplyId(long replyId) { this.replyId = replyId; }
 }

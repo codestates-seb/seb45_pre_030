@@ -20,17 +20,17 @@ public class Reply {
     private long replyId;
     /*
     @ManyToOne
-    @JoinColumn(name = "QUESTION_ID")
+    @JoinColumn(name = "QUESTION_ID", updatable = false)
     private Question question;
-
+    /*
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
      */
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private long questionId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private long memberId;
 
     @Lob
@@ -38,8 +38,9 @@ public class Reply {
     private String content;
 
     @CreatedDate
-    @Column(name = "reply_dttm", updatable = false)
-    private LocalDateTime replyDttm = LocalDateTime.now();
+    @Column(name = "reply_date_time", updatable = false)
+    private LocalDateTime replyDateTime = LocalDateTime.now();
+
 }
 
 

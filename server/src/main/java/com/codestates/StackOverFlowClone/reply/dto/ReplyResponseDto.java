@@ -15,6 +15,6 @@ public class ReplyResponseDto {
     private long questionId;
     private long memberId;
     private String content;
-    private LocalDateTime replyDttm;
+    private LocalDateTime replyDateTime;
 
 }
