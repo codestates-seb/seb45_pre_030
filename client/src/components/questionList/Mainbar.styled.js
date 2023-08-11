@@ -12,6 +12,10 @@ export const StatsContainer = styled.div`
   background-color: #fff;
   margin-right: 13px;
   margin-bottom: 4px;
+
+  > p:not(:first-of-type) {
+    color: hsl(200, 8%, 45%);
+  }
 `;
 
 export const StatsItem = styled.p`
