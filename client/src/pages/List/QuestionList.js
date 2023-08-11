@@ -6,6 +6,9 @@ function QuestionList() {
     <div>
       <Title>All Questions</Title>
       <Mainbar />
+      <Mainbar />
+      <Mainbar />
+      <Mainbar />
     </div>
   );
 }
