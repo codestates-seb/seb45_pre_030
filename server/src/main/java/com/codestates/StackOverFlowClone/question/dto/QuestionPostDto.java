@@ -23,13 +23,10 @@ public class QuestionPostDto {
     @Size(max = 1000)
     private String questionContent;
 
-    private long questionReplyLimitCount;
-
-    public QuestionPostDto(String questionTitle, String questionWriter, String questionContent, long questionReplyLimitCount) {
+    public QuestionPostDto(String questionTitle, String questionWriter, String questionContent) {
         this.questionTitle = questionTitle;
         this.questionWriter = questionWriter;
         this.questionContent = questionContent;
-        this.questionReplyLimitCount = questionReplyLimitCount;
     }
 
 }

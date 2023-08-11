@@ -25,7 +25,5 @@ public class QuestionPatchDto {
     @Size(max = 1000)
     private String questionContent;
 
-    private long questionReplyLimitCount;
-
 
 }
