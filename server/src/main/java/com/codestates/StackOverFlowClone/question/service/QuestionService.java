@@ -2,8 +2,6 @@ package com.codestates.StackOverFlowClone.question.service;
 
 
 import com.codestates.StackOverFlowClone.question.entity.Question;
-import com.codestates.StackOverFlowClone.question.exception.BusinessLogicException;
-import com.codestates.StackOverFlowClone.question.exception.ExceptionCode;
 import com.codestates.StackOverFlowClone.question.repository.QuestionRepository;
 import com.codestates.StackOverFlowClone.utils.CustomBeanUtils;
 import org.springframework.data.domain.Page;
@@ -36,7 +34,7 @@ public class QuestionService {
 
     public Question updateQuestion(Question question){
 
-        Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+        Question findQuestion = findQuestion(question.getQuestionId());
 
         Question updatingQuestion =
                 beanUtils.copyNonNullProperties(question, findQuestion);
@@ -46,16 +44,10 @@ public class QuestionService {
 
     public Question findQuestion(long questionId){
 
-        return findVerifiedQuestion(questionId);
-    }
-
-    public Question findVerifiedQuestion(long questionId){
-
         Optional<Question> optionalQuestion =
                 questionRepository.findById(questionId);
 
-        Question findQuestion =
-                optionalQuestion.orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOT_FOUND));
+        Question findQuestion = optionalQuestion.orElseThrow();
 
         return findQuestion;
     }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +15,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 public class Question {
+
+    // 답변개수 제한
+    @Transient
+    private long replyLimitCount = 5;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,34 +34,15 @@ public class Question {
     private String questionContent;
 
     @CreatedDate
-    @Column(name = "question_dttm")
-    private LocalDateTime questionDttm = LocalDateTime.now();
+    @Column(name = "question_date_time")
+    private LocalDateTime questionDateTime = LocalDateTime.now();
 
-    @Column
-    private long questionReplyLimitCount;
+    public long getReplyLimitCount(){
+        return replyLimitCount;
+    }
 
-//    @ManyToOne
-//    @JoinColumn(name = "CATEGORY_ID")
-//    private Category category;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
+    public void setReplyLimitCount(long replyLimitCount){
+        this.replyLimitCount = replyLimitCount;
+    }
 
-
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
-//
-//    public Member getMember() {
-//        return member;
-//    }
-//
-//    public void setMember(Member member) {
-//        this.member = member;
-//    }
 }

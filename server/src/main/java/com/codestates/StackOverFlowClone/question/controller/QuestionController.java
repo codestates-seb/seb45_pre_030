@@ -3,7 +3,6 @@ package com.codestates.StackOverFlowClone.question.controller;
 
 import com.codestates.StackOverFlowClone.question.dto.QuestionPatchDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionPostDto;
-import com.codestates.StackOverFlowClone.question.dto.QuestionResponseDto;
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.question.mapper.QuestionMapper;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/question")
@@ -38,7 +36,6 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto requestBody){
 
-
         Question questionmapper = mapper.questionPostDtoToQuestion(requestBody);
 
         Question question = questionService.createQuestion(questionmapper);
@@ -46,6 +43,7 @@ public class QuestionController {
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
         return ResponseEntity.created(location).body(mapper.questionToQuestionResponseDto(question));
+
     }
 
     @PatchMapping("/{question-id}")
@@ -73,7 +71,6 @@ public class QuestionController {
                 , HttpStatus.OK);
     }
 
-    // 되는지 확인하고 페이징 테스트
     @GetMapping
     public ResponseEntity getQuestions(@Positive @RequestParam int page,
                                        @Positive @RequestParam int size){
