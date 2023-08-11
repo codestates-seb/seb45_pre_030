@@ -36,6 +36,11 @@ export const Title = styled.h2`
   font-weight: 400;
   color: #0074cc;
   margin-bottom: 0.3846rem;
+
+  &:hover {
+    cursor: pointer;
+    color: hsl(206, 100%, 52%);
+  }
 `;
 
 export const Content = styled.p`
@@ -64,6 +69,11 @@ export const Tag = styled.input`
   padding: 0.4em 0.5em;
   color: hsl(205, 47%, 42%);
   border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: hsl(205, 53%, 88%);
+  }
 `;
 
 export const UserCardContainer = styled.div`
@@ -88,6 +98,10 @@ export const UserInfo = styled.div`
 
   > a {
     color: hsl(206, 100%, 40%);
+  }
+
+  > a:hover {
+    color: hsl(206, 100%, 52%);
   }
 
   > p {
