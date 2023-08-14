@@ -1,13 +1,13 @@
 package com.codestates.StackOverFlowClone.question.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.codestates.StackOverFlowClone.reply.entity.Reply;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,34 +15,32 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 public class Question {
-
-    // 답변개수 제한
-    @Transient
-    private long replyLimitCount = 5;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
 
     @Column(length = 100, nullable = false)
-    private String questionTitle;
+    private String title;
 
     @Column(length = 20, nullable = false)
-    private String questionWriter;
+    private long memberId;
 
     @Column(length = 1000)
-    private String questionContent;
+    private String content;
+
+    @Column
+    private Long viewCount = 0L;
+
+    @OneToMany(mappedBy = "question")
+    private List<Reply> replies = new ArrayList<>();
 
     @CreatedDate
-    @Column(name = "question_date_time")
-    private LocalDateTime questionDateTime = LocalDateTime.now();
+    @Column(updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+    // 답변개수 제한
+    @Transient
+    private long replyLimitCount = 5;
 
-    public long getReplyLimitCount(){
-        return replyLimitCount;
-    }
 
-    public void setReplyLimitCount(long replyLimitCount){
-        this.replyLimitCount = replyLimitCount;
-    }
 
 }

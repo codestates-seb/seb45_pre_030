@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,7 +38,7 @@ public class QuestionService {
         Question updatingQuestion =
                 beanUtils.copyNonNullProperties(question, findQuestion);
 
-        return questionRepository.save(findQuestion);
+        return questionRepository.save(updatingQuestion);
     }
 
     public Question findQuestion(long questionId){
@@ -47,7 +46,7 @@ public class QuestionService {
         Optional<Question> optionalQuestion =
                 questionRepository.findById(questionId);
 
-        Question findQuestion = optionalQuestion.orElseThrow();
+        Question findQuestion = optionalQuestion.orElseThrow(()->new RuntimeException());
 
         return findQuestion;
     }
@@ -56,6 +55,11 @@ public class QuestionService {
 
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").ascending()));
 
+    }
+
+    public void increaseViewCount(Question question) {
+        question.setViewCount(question.getViewCount()+1);
+        questionRepository.save(question);
     }
 
     public void deleteQuestion(long questionId){

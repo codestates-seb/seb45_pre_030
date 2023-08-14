@@ -1,7 +1,6 @@
 package com.codestates.StackOverFlowClone.reply.entity;
 
 import com.codestates.StackOverFlowClone.question.entity.Question;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,17 +17,11 @@ public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long replyId;
-    /*
+
     @ManyToOne
-    @JoinColumn(name = "QUESTION_ID", updatable = false)
+    @JoinColumn(name = "QUESTION_ID")
     private Question question;
-    /*
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
-     */
-    @Column(nullable = false, updatable = false)
-    private long questionId;
+
 
     @Column(nullable = false, updatable = false)
     private long memberId;
@@ -38,8 +31,8 @@ public class Reply {
     private String content;
 
     @CreatedDate
-    @Column(name = "reply_date_time", updatable = false)
-    private LocalDateTime replyDateTime = LocalDateTime.now();
+    @Column(updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 }
 

@@ -1,5 +1,6 @@
 package com.codestates.StackOverFlowClone.reply.controller;
 
+import com.codestates.StackOverFlowClone.reply.dto.ReplyDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyPatchDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyPostDto;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
@@ -30,7 +31,7 @@ public class ReplyController {
     }
     @PostMapping
     public ResponseEntity postReply(@PathVariable("question-id") @Positive long questionId,
-                                    @Valid @RequestBody ReplyPostDto requestBody) {
+                                    @Valid @RequestBody ReplyDto.Post requestBody) {
         requestBody.setQuestionId(questionId);
 
         Reply reply = mapper.ReplyPostDtoToReply(requestBody);
@@ -48,7 +49,7 @@ public class ReplyController {
     @PatchMapping("/{reply-id}")
     public ResponseEntity patchReply(@PathVariable("question-id") @Positive long questionId,
                                      @PathVariable("reply-id") @Positive long replyId,
-                                     @Valid @RequestBody ReplyPatchDto requestBody) {
+                                     @Valid @RequestBody ReplyDto.Patch requestBody) {
         requestBody.setReplyId(replyId);
         requestBody.setQuestionId(questionId);
 

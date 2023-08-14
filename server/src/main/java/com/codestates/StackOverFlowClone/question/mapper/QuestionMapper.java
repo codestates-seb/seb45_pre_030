@@ -1,23 +1,53 @@
 package com.codestates.StackOverFlowClone.question.mapper;
 
 
-import com.codestates.StackOverFlowClone.question.dto.QuestionPatchDto;
-import com.codestates.StackOverFlowClone.question.dto.QuestionPostDto;
-import com.codestates.StackOverFlowClone.question.dto.QuestionResponseDto;
+import com.codestates.StackOverFlowClone.question.dto.QuestionDto;
+import com.codestates.StackOverFlowClone.question.dto.OnlyQuestionResponseDto;
 import com.codestates.StackOverFlowClone.question.entity.Question;
+import com.codestates.StackOverFlowClone.reply.dto.ReplyResponseDto;
+import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import org.mapstruct.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-    Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 
-    Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
+    Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto);
 
-    QuestionResponseDto questionToQuestionResponseDto(Question question);
+    Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto);
 
-    List<QuestionResponseDto> questionsToQuestionResponseDtos(List<Question> questions);
+    default QuestionDto.Response questionToQuestionResponseDto(Question question) {
+        OnlyQuestionResponseDto onlyQuestionResponseDto =
+                OnlyQuestionResponseDto.builder()
+                        .questionId(question.getQuestionId())
+                        .memberId(question.getMemberId())
+                        .title(question.getTitle())
+                        .content(question.getContent())
+                        .createdAt(question.getCreatedAt())
+                        .viewCount(question.getViewCount())
+                        .build();
+        List<ReplyResponseDto> replyResponseDtos = new ArrayList<>();
+        if(question.getReplies() != null) {
+            for(Reply reply : question.getReplies()) {
+                ReplyResponseDto replyResponseDto =
+                        ReplyResponseDto.builder()
+                                .replyId(reply.getReplyId())
+                                .questionId(reply.getQuestion().getQuestionId())
+                                .memberId(reply.getMemberId())
+                                .content(reply.getContent())
+                                .createdAt(reply.getCreatedAt())
+                                .build();
+                replyResponseDtos.add(replyResponseDto);
+            }
+        }
+        return new QuestionDto.Response(onlyQuestionResponseDto, replyResponseDtos);
+    }
+
+    OnlyQuestionResponseDto questionToOnlyQuestionResponseDto(Question question);
+
+    List<OnlyQuestionResponseDto> questionsToOnlyQuestionResponseDtos(List<Question> questions);
 
 }
 
