@@ -80,8 +80,9 @@ function FilterOption() {
           ))}
           <TagContainer>
             <TagWrapper>
-              {filterTagList.length !== 0 &&
-                filterTagList.map((tag) => <FilterTag key={tag} tag={tag} />)}
+              {filterTagList.map((tag) => (
+                <FilterTag key={tag} tag={tag} />
+              ))}
               <Input
                 className="tag-editor"
                 placeholder={

@@ -1,7 +1,14 @@
+import CollectivesWidget from '../CollectivesWidget/CollectivesWidget';
+import SideWidget from '../SideWidget/SideWidget';
 import { Container } from './SideBar.styled';
 
 function SideBar() {
-  return <Container></Container>;
+  return (
+    <Container>
+      <SideWidget />
+      <CollectivesWidget />
+    </Container>
+  );
 }
 
 export default SideBar;

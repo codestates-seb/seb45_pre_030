@@ -36,7 +36,9 @@ function Questions() {
         <Question />
         <Question />
       </div>
-      <SideBar />
+      <div>
+        <SideBar />
+      </div>
     </Container>
   );
 }
