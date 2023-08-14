@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   Container,
@@ -12,28 +12,49 @@ import {
   Wrapper,
 } from './FilterOption.styled';
 import FilterTag from '../FilterTag/FilterTag';
+import { addFilterTag } from '../../../redux/actions';
 
-const FilterBy = ['No answers', 'No accepted answer', 'Has bounty'];
-const SortedBy = [
+const filterBy = ['No answers', 'No accepted answer', 'Has bounty'];
+const sortedBy = [
   'Newest',
   'Recent activity',
   'Highest score',
   'Most frequent',
   'Bounty ending soon',
 ];
-const TaggedWith = ['My watched tags', 'The following tags:'];
+const taggedWith = ['My watched tags', 'The following tags:'];
 
 function FilterOption() {
+  const dispatch = useDispatch();
+
   const isFilterOptionHidden = useSelector(
     (state) => state.isFilterOptionHidden,
   );
+
+  const filterTagList = useSelector((state) => state.filterTagList);
+
+  const handleTagInputKeyPress = (e) => {
+    // 스페이스바 금지
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      const tag = e.target.value.trim();
+      if (tag !== '' && !filterTagList.includes(tag)) {
+        dispatch(addFilterTag(tag));
+      }
+      e.target.value = '';
+      console.log(filterTagList);
+    }
+  };
 
   return (
     <Container className={isFilterOptionHidden ? 'hide' : ''}>
       <SubContainer>
         <Wrapper className="filterBy-wrapper">
           <Title>Filter by</Title>
-          {FilterBy.map((el) => (
+          {filterBy.map((el) => (
             <OptionWrapper key={el}>
               <Input type="checkbox" />
               <Option>{el}</Option>
@@ -42,7 +63,7 @@ function FilterOption() {
         </Wrapper>
         <Wrapper className="sortBy-wrapper">
           <Title>Sorted by</Title>
-          {SortedBy.map((el) => (
+          {sortedBy.map((el) => (
             <OptionWrapper key={el}>
               <Input type="radio" name="sortedBy" />
               <Option>{el}</Option>
@@ -51,7 +72,7 @@ function FilterOption() {
         </Wrapper>
         <Wrapper className="taggedWith-wrapper">
           <Title>Tagged with</Title>
-          {TaggedWith.map((el) => (
+          {taggedWith.map((el) => (
             <OptionWrapper key={el}>
               <Input type="radio" name="taggedWith" />
               <Option>{el}</Option>
@@ -59,12 +80,16 @@ function FilterOption() {
           ))}
           <TagContainer>
             <TagWrapper>
-              <FilterTag />
+              {filterTagList.length !== 0 &&
+                filterTagList.map((tag) => <FilterTag key={tag} tag={tag} />)}
+              <Input
+                className="tag-editor"
+                placeholder={
+                  filterTagList.length === 0 ? 'e.g. javascript or python' : ''
+                }
+                onKeyPress={handleTagInputKeyPress}
+              />
             </TagWrapper>
-            <Input
-              className="tag-editor"
-              placeholder="e.g. javascript or python"
-            />
           </TagContainer>
         </Wrapper>
       </SubContainer>

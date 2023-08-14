@@ -52,6 +52,8 @@ export const Input = styled.input`
   &.tag-editor {
     border-style: none;
     padding-left: calc(0.7em - 2px);
+    background-color: initial;
+    margin: 5px 0;
   }
 
   &.hide {
@@ -70,6 +72,7 @@ export const Input = styled.input`
 export const Option = styled.p`
   margin: 0 4px;
   font-size: 1rem;
+  white-space: nowrap;
 `;
 
 export const TagContainer = styled.div`
@@ -82,9 +85,13 @@ export const TagContainer = styled.div`
   padding: 2px;
 `;
 
-export const TagWrapper = styled.ul`
+export const TagWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin: 2px 0;
+  min-height: 28px;
+  max-width: calc(97.2307692rem / 6);
+  white-space: normal;
 `;
 
 export const Button = styled.button`

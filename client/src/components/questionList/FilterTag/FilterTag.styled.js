@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.li`
+export const Container = styled.div`
   display: flex;
   align-items: center;
   background-color: hsl(205, 46%, 92%);
@@ -20,6 +20,7 @@ export const Name = styled.p`
   margin-right: 4px;
   color: hsl(205, 47%, 42%);
   font-size: 11px;
+  white-space: nowrap;
 `;
 
 export const Button = styled.button`
