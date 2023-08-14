@@ -22,11 +22,11 @@ const sortedBy = [
   'Most frequent',
   'Bounty ending soon',
 ];
+
 const taggedWith = ['My watched tags', 'The following tags:'];
 
 function FilterOption() {
   const dispatch = useDispatch();
-
   const isFilterOptionHidden = useSelector(
     (state) => state.isFilterOptionHidden,
   );
@@ -54,6 +54,7 @@ function FilterOption() {
       <SubContainer>
         <Wrapper className="filterBy-wrapper">
           <Title>Filter by</Title>
+
           {filterBy.map((el) => (
             <OptionWrapper key={el}>
               <Input type="checkbox" />
