@@ -9,12 +9,12 @@ import {
   Total,
 } from './Questions.styled';
 import SideBar from '../../components/questionList/SideBar/SideBar';
-import NavButton from '../../components/questionList/NavButton/NavButton';
 import FilterButton from '../../components/questionList/FilterButton/FilterButton';
 import FilterOption from '../../components/questionList/FilterOption/FilterOption';
 import Question from '../../components/questionList/Question/Question';
+import SortButton from '../../components/questionList/SortButton/SortButton';
 
-function QuestionList() {
+function Questions() {
   return (
     <Container>
       <div>
@@ -26,7 +26,7 @@ function QuestionList() {
           <SubWrapper>
             <Total>23,853,671 questions</Total>
             <FilterWrapper>
-              <NavButton />
+              <SortButton />
               <FilterButton />
             </FilterWrapper>
           </SubWrapper>
@@ -41,4 +41,4 @@ function QuestionList() {
   );
 }
 
-export default QuestionList;
+export default Questions;

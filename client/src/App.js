@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router';
-import QuestionList from './pages/Questions/Questions';
+import Questions from './pages/Questions/Questions';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/questions" element={<QuestionList />} />
+        <Route path="/questions" element={<Questions />} />
       </Routes>
     </div>
   );
