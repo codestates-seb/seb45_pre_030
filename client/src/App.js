@@ -1,11 +1,12 @@
-import QuestionList from './pages/List/QuestionList';
+import { Routes, Route } from 'react-router';
+import QuestionList from './pages/Questions/Questions';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <QuestionList />
-      </header>
+      <Routes>
+        <Route path="/questions" element={<QuestionList />} />
+      </Routes>
     </div>
   );
 }

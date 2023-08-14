@@ -7,7 +7,7 @@ import {
   Title,
   TitleWrapper,
   Total,
-} from './QuestionList.styled';
+} from './Questions.styled';
 import SideBar from '../../components/questionList/SideBar/SideBar';
 import NavButton from '../../components/questionList/NavButton/NavButton';
 import FilterButton from '../../components/questionList/FilterButton/FilterButton';
