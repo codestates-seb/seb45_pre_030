@@ -1,4 +1,3 @@
-import Mainbar from '../../components/questionList/Mainbar/Mainbar';
 import AskButton from '../../components/questionList/AskButton/AskButton';
 import {
   Container,
@@ -12,6 +11,8 @@ import {
 import SideBar from '../../components/questionList/SideBar/SideBar';
 import NavButton from '../../components/questionList/NavButton/NavButton';
 import FilterButton from '../../components/questionList/FilterButton/FilterButton';
+import FilterOption from '../../components/questionList/FilterOption/FilterOption';
+import Question from '../../components/questionList/Question/Question';
 
 function QuestionList() {
   return (
@@ -29,11 +30,11 @@ function QuestionList() {
               <FilterButton />
             </FilterWrapper>
           </SubWrapper>
+          <FilterOption />
         </SubContainer>
-        <Mainbar />
-        <Mainbar />
-        <Mainbar />
-        <Mainbar />
+        <Question />
+        <Question />
+        <Question />
       </div>
       <SideBar />
     </Container>

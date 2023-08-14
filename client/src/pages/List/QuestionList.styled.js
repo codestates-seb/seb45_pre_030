@@ -21,6 +21,7 @@ export const Title = styled.h1`
 
 export const SubContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
 `;

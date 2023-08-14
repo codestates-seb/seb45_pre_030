@@ -58,22 +58,9 @@ export const MetaContainer = styled.div`
   width: 100%;
 `;
 
-export const TagContainer = styled.div`
+export const TagContainer = styled.ul`
   display: flex;
   gap: 6px;
-`;
-
-export const Tag = styled.input`
-  background-color: hsl(205, 46%, 92%);
-  border-style: none;
-  padding: 0.4em 0.5em;
-  color: hsl(205, 47%, 42%);
-  border-radius: 4px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: hsl(205, 53%, 88%);
-  }
 `;
 
 export const UserCardContainer = styled.div`
