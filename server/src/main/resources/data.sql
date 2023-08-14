@@ -1,0 +1,13 @@
+insert into question values (11, 'content1', now(), 1, 'title1', 1)
+insert into question values (12, 'content2', now(), 1, 'title2', 2)
+insert into question values (13, 'content3', now(), 1, 'title3', 3)
+
+insert into reply values (11, 'question11', now(), 1, 11)
+insert into reply values (12, 'question12', now(), 1, 11)
+insert into reply values (13, 'question13', now(), 1, 11)
+insert into reply values (14, 'question21', now(), 1, 12)
+insert into reply values (15, 'question22', now(), 1, 12)
+insert into reply values (16, 'question23', now(), 1, 12)
+insert into reply values (17, 'question31', now(), 1, 13)
+insert into reply values (18, 'question32', now(), 1, 13)
+insert into reply values (19, 'question33', now(), 1, 13)
