@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReplyPostDto {
+
+
     private long questionId;
 
     private long memberId;

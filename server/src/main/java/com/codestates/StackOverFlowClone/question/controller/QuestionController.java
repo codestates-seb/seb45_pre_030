@@ -1,12 +1,14 @@
 package com.codestates.StackOverFlowClone.question.controller;
 
 
+import com.codestates.StackOverFlowClone.question.dto.QuestionDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionPatchDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionPostDto;
 import com.codestates.StackOverFlowClone.question.entity.Question;
-import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.question.mapper.QuestionMapper;
+import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.response.MultiResponseDto;
+import com.codestates.StackOverFlowClone.response.SingleResponseDto;
 import com.codestates.StackOverFlowClone.utils.UriCreator;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -34,7 +36,7 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto requestBody){
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post requestBody){
 
         Question questionmapper = mapper.questionPostDtoToQuestion(requestBody);
 
@@ -48,7 +50,7 @@ public class QuestionController {
 
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") @Positive long questionId,
-                                       @Valid @RequestBody QuestionPatchDto requestBody){
+                                       @Valid @RequestBody QuestionDto.Patch requestBody){
 
         requestBody.setQuestionId(questionId);
 
@@ -57,7 +59,7 @@ public class QuestionController {
         Question response = questionService.updateQuestion(question);
 
         return new ResponseEntity<>(
-                mapper.questionToQuestionResponseDto(response)
+                mapper.questionToOnlyQuestionResponseDto(response)
                 , HttpStatus.OK);
     }
 
@@ -65,9 +67,11 @@ public class QuestionController {
     public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId){
 
         Question response = questionService.findQuestion(questionId);
+        questionService.increaseViewCount(response);
 
-        return new ResponseEntity<>(
-                mapper.questionToQuestionResponseDto(response)
+
+        return new ResponseEntity<>(new SingleResponseDto(
+                mapper.questionToQuestionResponseDto(response))
                 , HttpStatus.OK);
     }
 
@@ -80,7 +84,7 @@ public class QuestionController {
         List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
+                new MultiResponseDto<>(mapper.questionsToOnlyQuestionResponseDtos(questions),
                         pageQuestions),
                 HttpStatus.OK);
 

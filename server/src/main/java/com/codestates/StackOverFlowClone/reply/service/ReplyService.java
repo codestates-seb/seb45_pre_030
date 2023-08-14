@@ -1,17 +1,18 @@
 package com.codestates.StackOverFlowClone.reply.service;
 
 import com.codestates.StackOverFlowClone.question.entity.Question;
-
 import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import com.codestates.StackOverFlowClone.reply.repository.ReplyRepository;
 import com.codestates.StackOverFlowClone.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ReplyService {
     private final ReplyRepository replyRepository;
     private final QuestionService questionService;
@@ -26,7 +27,8 @@ public class ReplyService {
     }
 
     public Reply createReply(Reply reply) {
-        verifyReply(reply);
+        Question question = verifyExistQuestion(reply);
+        verifyOverReplyCount(question);
         return replyRepository.save(reply);
     }
 
@@ -48,7 +50,8 @@ public class ReplyService {
     }
 
     public List<Reply> findQuestionReplies(long questionId) {
-        return replyRepository.findAllByQuestionId(questionId);
+        Question question = questionService.findQuestion(questionId);
+        return replyRepository.findAllByQuestion(question);
     }
 
     public void deleteReply(long replyId) {
@@ -65,7 +68,13 @@ public class ReplyService {
         return findReply;
     }
 
-    public void verifyReply(Reply reply) {
-        questionService.findQuestion(reply.getQuestionId());
+    public Question verifyExistQuestion(Reply reply) {
+        Question question = questionService.findQuestion(reply.getQuestion().getQuestionId());
+        return question;
+    }
+
+    public void verifyOverReplyCount(Question question) {
+        if(question.getReplies().size() >= question.getReplyLimitCount())
+            throw new RuntimeException();
     }
 }

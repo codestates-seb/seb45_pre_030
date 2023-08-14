@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,18 +12,18 @@ import java.time.LocalDateTime;
 public class QuestionPostDto {
 
     @Size(max = 100)
-    private String questionTitle;
+    private String title;
 
     @Size(max = 20)
-    private String questionWriter;
+    private long memberId;
 
     @Size(max = 1000)
-    private String questionContent;
+    private String content;
 
-    public QuestionPostDto(String questionTitle, String questionWriter, String questionContent) {
-        this.questionTitle = questionTitle;
-        this.questionWriter = questionWriter;
-        this.questionContent = questionContent;
+    public QuestionPostDto(String title, long memberId, String content) {
+        this.title = title;
+        this.memberId = memberId;
+        this.content = content;
     }
 
 }
