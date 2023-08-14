@@ -54,7 +54,6 @@ function FilterOption() {
       <SubContainer>
         <Wrapper className="filterBy-wrapper">
           <Title>Filter by</Title>
-
           {filterBy.map((el) => (
             <OptionWrapper key={el}>
               <Input type="checkbox" />
