@@ -28,7 +28,7 @@ export const FontW = styled.span`
 `;
 
 export const QuestionInput = styled.input`
-  width: 700px;
+  width: 50%;
   height: 30px;
   border-radius: 6px;
   border: 0.5px solid gray;
