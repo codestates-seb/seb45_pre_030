@@ -1,5 +1,6 @@
 package com.codestates.StackOverFlowClone.reply.dto;
 
+import com.codestates.StackOverFlowClone.comment.dto.CommentResponseDto;
 import com.codestates.StackOverFlowClone.comment.entity.Comment;
 import lombok.*;
 
@@ -18,5 +19,5 @@ public class ReplyResponseDto {
     private long memberId;
     private String content;
     private LocalDateTime createdAt;
-    private List<Comment> comments;
+    private List<CommentResponseDto> comments;
 }

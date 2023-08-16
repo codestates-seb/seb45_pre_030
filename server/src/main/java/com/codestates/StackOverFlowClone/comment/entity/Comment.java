@@ -1,6 +1,5 @@
 package com.codestates.StackOverFlowClone.comment.entity;
 
-import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +8,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -26,6 +23,9 @@ public class Comment {
 //    @ManyToOne
 //    @JoinColumn(name = "MEMBER_ID")
 //    private Member member;
+
+    @Column(nullable = false, updatable = false)
+    private long memberId;
 
     @ManyToOne
     @JoinColumn(name = "REPLY_ID")

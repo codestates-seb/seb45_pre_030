@@ -25,7 +25,6 @@ public class Reply {
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
-
     @Column(nullable = false, updatable = false)
     private long memberId;
 

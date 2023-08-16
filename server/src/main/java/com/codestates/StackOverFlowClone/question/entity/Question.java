@@ -37,6 +37,7 @@ public class Question {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
     // 답변개수 제한
     @Transient
     private long replyLimitCount = 5;

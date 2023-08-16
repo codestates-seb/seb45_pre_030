@@ -13,9 +13,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-
     Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto);
-
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto);
 
     default QuestionDto.Response questionToQuestionResponseDto(Question question) {
@@ -38,6 +36,7 @@ public interface QuestionMapper {
                                 .memberId(reply.getMemberId())
                                 .content(reply.getContent())
                                 .createdAt(reply.getCreatedAt())
+                                .comments(reply.getComments())
                                 .build();
                 replyResponseDtos.add(replyResponseDto);
             }
