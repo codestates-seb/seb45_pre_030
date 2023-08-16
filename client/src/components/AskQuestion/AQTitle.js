@@ -10,6 +10,7 @@ import {
 } from './AQ.styled';
 
 function Title({ onCreate }) {
+  // 질문 작성칸 상태
   const [state, setState] = useState({
     title: '',
     content: '',
@@ -17,6 +18,7 @@ function Title({ onCreate }) {
 
   const contentUseRef = useRef();
 
+  // text입력할 때 마다 작성칸 상태 변경
   const HandleChangeState = (e) => {
     setState({
       ...state,
@@ -24,6 +26,7 @@ function Title({ onCreate }) {
     });
   };
 
+  // 버튼 누르면 저장
   const HandleSubmit = () => {
     if (state.content.length < 20) {
       alert('20글자 이상 작성해 주세요.');
