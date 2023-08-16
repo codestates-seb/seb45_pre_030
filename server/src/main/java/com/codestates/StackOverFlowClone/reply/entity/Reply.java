@@ -1,5 +1,6 @@
 package com.codestates.StackOverFlowClone.reply.entity;
 
+import com.codestates.StackOverFlowClone.comment.entity.Comment;
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -33,6 +36,9 @@ public class Reply {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "reply")
+    private List<Comment> comments = new ArrayList<>();
 
 }
 
