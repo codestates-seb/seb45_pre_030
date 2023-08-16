@@ -17,69 +17,17 @@ import java.util.List;
 public interface QuestionMapper {
     Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto);
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto);
-    /*
-    default QuestionResponseDto questionToQuestionResponseDto(Question question) {
 
-        if (question == null) {
-            return null;
-        }
-        QuestionResponseDto.QuestionResponseDtoBuilder questionResponseDto = QuestionResponseDto.builder();
+    OnlyQuestionResponseDto questionToOnlyQuestionResponseDto(Question question);
 
-        questionResponseDto.questionId(question.getQuestionId());
-        questionResponseDto.memberId(question.getMemberId());
-        questionResponseDto.title(question.getTitle());
-
-        questionResponseDto.content(question.getContent());
-        questionResponseDto.createdAt(question.getCreatedAt());
-        questionResponseDto.replies(replyListToReplyResponseDtoList(question.getReplies()));
-
-        return questionResponseDto.build();
-    }
-    default ReplyResponseDto replyToReplyResponseDto(Reply reply) {
-        if ( reply == null ) {
-            return null;
-        }
-
-        ReplyResponseDto.ReplyResponseDtoBuilder replyResponseDto = ReplyResponseDto.builder();
-
-        replyResponseDto.replyId( reply.getReplyId() );
-        replyResponseDto.content( reply.getContent() );
-        replyResponseDto.questionId(reply.getQuestion().getQuestionId());
-        replyResponseDto.memberId(reply.getMemberId());
-        replyResponseDto.createdAt( reply.getCreatedAt() );
-
-        return replyResponseDto.build();
-    }
-    default List<ReplyResponseDto> replyListToReplyResponseDtoList(List<Reply> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<ReplyResponseDto> list1 = new ArrayList<ReplyResponseDto>( list.size() );
-        for ( Reply reply : list ) {
-            list1.add( replyToReplyResponseDto( reply ) );
-        }
-
-        return list1;
-    }
-    */
+    List<OnlyQuestionResponseDto> questionsToOnlyQuestionResponseDtos(List<Question> questions);
 
     default QuestionDto.Response questionToQuestionResponseDto(Question question) {
 
-        OnlyQuestionResponseDto onlyQuestionResponseDto = getOneQuestionDto(question);
+        OnlyQuestionResponseDto onlyQuestionResponseDto = questionToOnlyQuestionResponseDto(question);
         List<ReplyResponseDto> replyResponseDtos = getRepliesResponseDto(question);
 
         return new QuestionDto.Response(onlyQuestionResponseDto, replyResponseDtos);
-    }
-    default OnlyQuestionResponseDto getOneQuestionDto(Question question){
-        return OnlyQuestionResponseDto.builder()
-                .questionId(question.getQuestionId())
-                .memberId(question.getMemberId())
-                .title(question.getTitle())
-                .content(question.getContent())
-                .createdAt(question.getCreatedAt())
-                .viewCount(question.getViewCount())
-                .build();
     }
     default List<ReplyResponseDto> getRepliesResponseDto(Question question) {
         List<ReplyResponseDto> replyResponseDtos = new ArrayList<>();
@@ -119,14 +67,6 @@ public interface QuestionMapper {
         }
             return commentResponseDtos;
     }
-
-
-
-
-    OnlyQuestionResponseDto questionToOnlyQuestionResponseDto(Question question);
-
-    List<OnlyQuestionResponseDto> questionsToOnlyQuestionResponseDtos(List<Question> questions);
-
 }
 
 
