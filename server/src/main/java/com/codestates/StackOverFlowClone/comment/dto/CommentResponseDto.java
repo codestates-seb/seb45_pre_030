@@ -12,6 +12,7 @@ public class CommentResponseDto {
     private long commentId;
     private long replyId;
     //    private Member member;
+    private long memberId;
     private String content;
     private LocalDateTime createdAt;
 }

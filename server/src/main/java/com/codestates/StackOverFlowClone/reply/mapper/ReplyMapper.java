@@ -74,6 +74,7 @@ public interface ReplyMapper {
 
         commentResponseDto.commentId( comment.getCommentId() );
         commentResponseDto.content( comment.getContent() );
+        commentResponseDto.memberId(comment.getMemberId());
         commentResponseDto.replyId(comment.getReply().getReplyId());
         commentResponseDto.createdAt( comment.getCreatedAt() );
 
