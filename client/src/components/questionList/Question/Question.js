@@ -14,7 +14,7 @@ import {
   UserInfo,
 } from './Question.styled';
 
-const dummydata = ['java', 'javascript', 'html', 'css'];
+const dummydata = { tag: ['java', 'javascript', 'html', 'css'] };
 
 function Question() {
   return (
@@ -29,7 +29,7 @@ function Question() {
         <Content>{`https://imanudin.net/2020/10/17/zimbra-tips-how-to-add-external-email-warning-message/ I have used this guide to set up my caution message but it doesn't seem to`}</Content>
         <MetaContainer>
           <TagContainer>
-            {dummydata.map((data) => (
+            {dummydata.tag.map((data) => (
               <Tag key={data} tag={data} />
             ))}
           </TagContainer>

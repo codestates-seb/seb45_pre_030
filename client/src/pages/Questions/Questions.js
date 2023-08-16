@@ -14,7 +14,7 @@ import FilterOption from '../../components/questionList/FilterOption/FilterOptio
 import Question from '../../components/questionList/Question/Question';
 import SortButton from '../../components/questionList/SortButton/SortButton';
 
-const dummy = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const dummydata = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 function Questions() {
   return (
@@ -26,7 +26,7 @@ function Questions() {
         </TitleWrapper>
         <SubContainer>
           <SubWrapper>
-            <Total>{dummy.length} questions</Total>
+            <Total>{dummydata.length} questions</Total>
             <FilterWrapper>
               <SortButton />
               <FilterButton />
@@ -34,7 +34,7 @@ function Questions() {
           </SubWrapper>
           <FilterOption />
         </SubContainer>
-        {dummy.map((data) => (
+        {dummydata.map((data) => (
           <Question key={data} />
         ))}
       </div>

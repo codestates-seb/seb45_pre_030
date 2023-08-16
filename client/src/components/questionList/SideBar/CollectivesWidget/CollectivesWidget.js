@@ -10,7 +10,7 @@ import {
   TitleWrapper,
 } from './CollectivesWidget.styled';
 
-const data = [
+const dummydata = [
   {
     img: 'logo192.png',
     sub: 'AWS',
@@ -39,7 +39,7 @@ function CollectivesWidget() {
         <Text>Collectives</Text>
         <Hyper>see all</Hyper>
       </TitleWrapper>
-      {data.map((data, idx) => (
+      {dummydata.map((data, idx) => (
         <Content key={idx}>
           <ContentWrapper>
             <Image src={data.img} />

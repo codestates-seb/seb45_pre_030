@@ -1,4 +1,4 @@
-import { Container, Button, MoreButton } from './SortButton.styled';
+import { Container, Button } from './SortButton.styled';
 
 const NavItem = [
   'Newest',
@@ -15,7 +15,7 @@ function SortButton() {
       {NavItem.map((el) => (
         <Button key={el}>{String(el)}</Button>
       ))}
-      <MoreButton>More</MoreButton>
+      {/* <MoreButton>More</MoreButton> */}
     </Container>
   );
 }
