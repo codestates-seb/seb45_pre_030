@@ -1,14 +1,11 @@
-import { Container } from "./Footer.styled";
+import { Container, Text } from './Footer.styled';
 
-
-function Footer(){
-
-    return(
-        <Container>
-            <Text>안녕</Text>
-        </Container>
-    )
-
+function Footer() {
+  return (
+    <Container>
+      <Text>안녕</Text>
+    </Container>
+  );
 }
 
 export default Footer;
