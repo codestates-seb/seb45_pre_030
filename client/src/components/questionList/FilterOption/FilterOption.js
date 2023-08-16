@@ -11,8 +11,8 @@ import {
   Title,
   Wrapper,
 } from './FilterOption.styled';
-import FilterTag from '../FilterTag/FilterTag';
 import { addFilterTag } from '../../../redux/actions';
+import FilterTag from './FilterTag/FilterTag';
 
 const filterBy = ['No answers', 'No accepted answer', 'Has bounty'];
 const sortedBy = [

@@ -34,3 +34,17 @@ export const Content = styled.li`
   width: 100%;
   padding: 12px 15px;
 `;
+
+export const Icon = styled.div`
+  display: flex;
+  margin-right: 8px;
+
+  &.sideWidget-message {
+    color: hsl(206, 90%, 69.5%);
+  }
+`;
+
+export const Hyper = styled.a`
+  cursor: pointer;
+  color: hsl(210, 8%, 25%);
+`;

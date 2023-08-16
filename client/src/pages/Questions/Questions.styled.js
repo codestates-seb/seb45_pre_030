@@ -15,7 +15,7 @@ export const TitleWrapper = styled.div`
 
 export const Title = styled.h1`
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 28px;
   line-height: 1.3;
 `;
 

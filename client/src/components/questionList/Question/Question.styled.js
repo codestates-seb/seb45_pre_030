@@ -32,9 +32,9 @@ export const ContentContainer = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
-  color: #0074cc;
+  color: hsl(206, 100%, 52%);
   margin-bottom: 0.3846rem;
 
   &:hover {

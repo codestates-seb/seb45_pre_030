@@ -7,3 +7,7 @@ export const Container = styled.div`
   width: 300px;
   margin-left: 24px;
 `;
+
+export const SideBarZone = styled.div`
+  min-height: 300px;
+`;
