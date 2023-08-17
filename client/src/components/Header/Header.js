@@ -16,7 +16,7 @@ import LogoSrc from '/Users/leeseeun/seb45_pre_030/client/src/common/image/icon.
 
 function Header() {
   // 로그인 on/off
-  const [login] = useState(true);
+  const [login] = useState(false);
 
   return (
     <HeaderBox>
