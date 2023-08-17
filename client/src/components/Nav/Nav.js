@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Container, NavContainer, NavWrapper, Text } from './Nav.styled';
 import { faEarthAmericas, faAward } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,23 +6,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const nav = [
   {
     page: 'Questions',
-    adress: '/',
+    url: '/',
   },
   {
     page: 'Tags',
-    adress: '/',
+    url: '/tags',
   },
   {
     page: 'Users',
-    adress: '/',
+    url: '/users',
   },
   {
     page: 'Companies',
-    adress: '/',
+    url: '/companies',
   },
 ];
 
 function Nav() {
+  const location = useLocation();
+
   return (
     <Container>
       <NavContainer>
@@ -37,9 +39,11 @@ function Nav() {
         {nav.map((nav, idx) => (
           <NavWrapper
             key={nav.page}
-            className={idx === 0 && 'wrapper-withIcon nav-selected'}
+            className={`${idx === 0 && 'wrapper-withIcon'} ${
+              location.pathname === nav.url ? 'nav-selected' : ''
+            }`}
           >
-            <Link to={nav.adress} className={idx === 0 && 'link-withIcon'}>
+            <Link to={nav.url} className={idx === 0 && 'link-withIcon'}>
               {idx === 0 && <FontAwesomeIcon icon={faEarthAmericas} />}
               <Text className={`nav-list ${idx !== 0 && 'nav-list-padding'}`}>
                 {nav.page}
@@ -50,8 +54,12 @@ function Nav() {
         <NavWrapper>
           <Text className="nav-group">COLLECTIVES</Text>
         </NavWrapper>
-        <NavWrapper>
-          <Link to="/" className="link-withIcon">
+        <NavWrapper
+          className={`${
+            location.pathname === '/collectives' && 'nav-selected'
+          }`}
+        >
+          <Link to="/collectives" className="link-withIcon">
             <FontAwesomeIcon icon={faAward} />
             <Text className="nav-list">Explore Collectives</Text>
           </Link>
