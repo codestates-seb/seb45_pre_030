@@ -61,3 +61,8 @@ export const QuestionInput = styled.input`
   border: 0.5px solid gray;
   padding: 0px 10px;
 `;
+
+export const UserStyledNav = styled(Link)`
+  font-weight: 500;
+  padding-right: 10px;
+`;

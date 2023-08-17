@@ -3,6 +3,7 @@ import {
   HeaderBox,
   Head,
   StyledLink,
+  UserStyledNav,
   Nav,
   StyledNav,
   FontW,
@@ -15,7 +16,7 @@ import LogoSrc from '/Users/leeseeun/seb45_pre_030/client/src/common/image/icon.
 
 function Header() {
   // 로그인 on/off
-  const [login] = useState(false);
+  const [login] = useState(true);
 
   return (
     <HeaderBox>
@@ -34,7 +35,14 @@ function Header() {
 
 // LoginSuccess
 function LoginSuccess() {
-  return <>{userData[0].username}님</>;
+  return (
+    <>
+      <UserStyledNav to="/profile" style={{ textDecoration: 'none' }}>
+        {userData[0].username}
+      </UserStyledNav>
+      님
+    </>
+  );
 }
 
 // Loginfail
