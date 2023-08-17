@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
+=======
+  padding: 24px;
+  max-width: 1264px;
+>>>>>>> 623fbd4 (remove: 파일 삭제)
 `;
 
 export const SectionContainer = styled.div`
