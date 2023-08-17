@@ -1,11 +1,13 @@
+import { Routes, Route } from 'react-router';
+import Questions from './pages/Questions/Questions';
 import Footer from './components/Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <span>초기화면</span>
-      </header>
+      <Routes>
+        <Route path="/" element={<Questions />} />
+      </Routes>
       <Footer />
     </div>
   );

@@ -54,4 +54,10 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     cursor: pointer;
   }
+
+  &.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
