@@ -4,7 +4,7 @@ import Footer from './components/Footer/Footer';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
-import Signup from './components/Signup/Signup';
+import Signup from './components/Signup/Signup/Signup';
 
 function App() {
   return (
