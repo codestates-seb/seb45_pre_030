@@ -1,11 +1,12 @@
 package com.codestates.StackOverFlowClone.reply.dto;
 
+import com.codestates.StackOverFlowClone.comment.dto.CommentResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
+import java.util.List;
 
 public class ReplyDto {
     @Getter
@@ -39,10 +40,7 @@ public class ReplyDto {
     @AllArgsConstructor
     @Getter
     public static class Response {
-        private long replyId;
-        private long questionId;
-        private long memberId;
-        private String content;
-        private LocalDateTime createdAt;
+        OneReplyResponse oneReply;
+        List<CommentResponseDto> comments;
     }
 }

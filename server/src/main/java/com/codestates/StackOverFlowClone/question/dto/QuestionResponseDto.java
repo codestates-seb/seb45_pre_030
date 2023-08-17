@@ -1,27 +1,29 @@
 package com.codestates.StackOverFlowClone.question.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.codestates.StackOverFlowClone.reply.dto.ReplyResponseDto;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
+@Builder
 public class QuestionResponseDto {
 
     private long questionId;
+    private long memberId;
 
-    private String questionTitle;
+    private String title;
 
-    private String questionWriter;
+    private String writer;
 
-    private String questionContent;
+    private String content;
 
-    private LocalDateTime questionDateTime;
+    private LocalDateTime  createdAt;
+    private List<ReplyResponseDto> replies;
 
 }

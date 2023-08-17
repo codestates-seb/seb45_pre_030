@@ -11,3 +11,8 @@ insert into reply values (16, 'question23', now(), 1, 12)
 insert into reply values (17, 'question31', now(), 1, 13)
 insert into reply values (18, 'question32', now(), 1, 13)
 insert into reply values (19, 'question33', now(), 1, 13)
+
+insert into comment values (11, 'comment111', now(), 1, 11)
+insert into comment values (12, 'comment112', now(), 1, 11)
+insert into comment values (13, 'comment121', now(), 1, 12)
+insert into comment values (14, 'comment122', now(), 1, 12)
