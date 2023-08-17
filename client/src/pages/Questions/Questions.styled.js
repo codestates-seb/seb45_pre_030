@@ -2,10 +2,24 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  padding: 24px;
+  justify-content: center;
 `;
 
-export const Section = styled.div``;
+export const SectionContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  max-width: 1264px;
+`;
+
+export const Section = styled.div`
+  &.questions-main-section {
+    border-left: 1px solid hsl(210, 8%, 90%);
+  }
+
+  &.questions-side-section {
+    padding-top: 24px;
+  }
+`;
 
 export const TitleWrapper = styled.div`
   display: flex;
@@ -13,6 +27,7 @@ export const TitleWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-bottom: 24px;
+  padding: 24px 0 0 24px;
 `;
 
 export const Title = styled.h1`
@@ -26,6 +41,7 @@ export const SubContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-left: 24px;
 `;
 
 export const SubWrapper = styled.div`
