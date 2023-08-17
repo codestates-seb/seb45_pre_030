@@ -43,7 +43,7 @@ public class CommentController {
         return ResponseEntity.created(location).build();
     }
 
-    @PatchMapping("{comment-id}")
+    @PatchMapping("{comment-id}")gg
     public ResponseEntity patchComment(@Valid @RequestBody CommentDto.Patch requestBody, @PathVariable("reply-id") @Positive long replyId,
                                        @PathVariable("comment-id") @Positive long commentId) {
         requestBody.setCommentId(commentId);
