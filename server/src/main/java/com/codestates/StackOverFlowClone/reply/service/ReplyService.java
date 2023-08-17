@@ -41,6 +41,14 @@ public class ReplyService {
         return replyRepository.save(updatedReply);
     }
 
+    public Reply updateReplyChoice(Reply reply) {
+        Reply findReply = findVerifiedReply(reply.getReplyId());
+
+        findReply.setChoice(1L);
+
+        return replyRepository.save(findReply);
+    }
+
     public Reply findReply(long replyId) {
         return findVerifiedReply(replyId);
     }

@@ -1,13 +1,25 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id "org.asciidoctor.jvm.convert" version "3.3.2"
 	id 'java'
+	id 'org.springframework.boot' version '2.7.14'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 group = 'com.codestates'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+// RestDocs 사용시 주석해제
+//configurations {
+//	asciidoctorExtensions
+//}
+
 
 repositories {
 	mavenCentral()
@@ -17,28 +29,28 @@ ext {
 	set('snippetsDir', file("build/generated-snippets"))
 }
 
-configurations {
-	asciidoctorExtensions
-}
-
 dependencies {
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	// RestDocs 사용시 주석해제
+//	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+//	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springframework.session:spring-session-core'
+	implementation 'com.google.code.gson:gson'
+	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-	implementation 'com.google.code.gson:gson'
-
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -46,39 +58,34 @@ dependencies {
 	runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
-// RestDocs 작성 후 gradle빌드 시 아래 소스로 인해 H2와 충돌발생
-// 평소 gradle빌드 시에는 아래 소스를 주석처리 후 gradle빌드 진행하고,
-// RestDocs HTML 생성을 위한 gradle빌드 시에는 아래 주석 해제 후 gradle refresh한다.
-// application.yml 에서 ddl-auto: 을 none -> create 수정.
-// 그리고 resource 내의 schema.sql 과 data.sql 을 빼낸다.
-// gradle 빌드 후 HTML 파일을 만들었으면 다시 복구.
-// * JUnit 테스트시에는 그냥 아래 소스만 주석 해제하고 JUnit 테스트 진행.
+// JUnit테스트시 주석 해제
 //tasks.named('test') {
 //	outputs.dir snippetsDir
 //	useJUnitPlatform()
 //}
 
-tasks.named('asciidoctor') {
-	configurations "asciidoctorExtensions"
-	inputs.dir snippetsDir
-	dependsOn test
-}
+// RestDocs 사용시 주석 해제
+//tasks.named('asciidoctor') {
+//	inputs.dir snippetsDir
+//	dependsOn test
+//}
 
-task copyDocument(type: Copy) {
-	dependsOn asciidoctor
-	println "asciidoctor output: ${asciidoctor.outputDir}"
-	from file("${asciidoctor.outputDir}")
-	into file("src/main/resources/static/docs")
-}
-
-build {
-	dependsOn copyDocument
-}
-
-bootJar {
-	enabled = true
-	dependsOn copyDocument
-	from ("${asciidoctor.outputDir}") {
-		into 'static/docs'
-	}
-}
+// RestDocs 사용시 주석 해제
+//task copyDocument(type: Copy) {
+//	dependsOn asciidoctor
+//	println "asciidoctor output: ${asciidoctor.outputDir}"
+//	from file("${asciidoctor.outputDir}")
+//	into file("src/main/resources/static/docs")
+//}
+// RestDocs 사용시 주석 해제
+//build {
+//	dependsOn copyDocument
+//}
+// RestDocs 사용시 주석 해제
+//bootJar {
+//	enabled = true
+//	dependsOn copyDocument
+//	from ("${asciidoctor.outputDir}") {
+//		into 'static/docs'
+//	}
+//}

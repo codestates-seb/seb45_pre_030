@@ -20,4 +20,6 @@ public class ReplyResponseDto {
     private String content;
     private LocalDateTime createdAt;
     private List<CommentResponseDto> comments;
+    private long choice;
+
 }

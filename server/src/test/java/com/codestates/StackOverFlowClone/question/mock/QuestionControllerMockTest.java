@@ -91,7 +91,7 @@ public class QuestionControllerMockTest {
 
         // given
 
-        Question curQuestion = new Question(1L,"title1",1L,"content1",0L,null,null,0L);
+        Question curQuestion = new Question(1L,"title1",1L,"content1",0L,null,null,0L, 0L);
 
         QuestionDto.Patch patch = new QuestionDto.Patch();
         patch.setQuestionId(1L);
@@ -138,7 +138,7 @@ public class QuestionControllerMockTest {
     void getQuestionTest() throws Exception {
 
         // given
-        Question curQuestion = new Question(1L,"title1",1L,"content1",0L,null,null,0L);
+        Question curQuestion = new Question(1L,"title1",1L,"content1",0L,null,null,0L, 0L);
 
         OnlyQuestionResponseDto onlyresponse = new OnlyQuestionResponseDto();
         onlyresponse.setQuestionId(curQuestion.getQuestionId());
@@ -172,8 +172,8 @@ public class QuestionControllerMockTest {
     @Test
     void getQuestionsTest() throws Exception {
         //given
-        Question curQuestion1 = new Question(1L,"title1",1L,"content1",0L,null,null,0L);
-        Question curQuestion2 = new Question(2L,"title2",2L,"content2",0L,null,null,0L);
+        Question curQuestion1 = new Question(1L,"title1",1L,"content1",0L,null,null,0L, 0L);
+        Question curQuestion2 = new Question(2L,"title2",2L,"content2",0L,null,null,0L, 0L);
 
         OnlyQuestionResponseDto onlyresponse1 = new OnlyQuestionResponseDto();
         onlyresponse1.setQuestionId(curQuestion1.getQuestionId());
@@ -230,7 +230,7 @@ public class QuestionControllerMockTest {
     @Test
     void deleteQuestionTest() throws Exception {
         // given
-        Question curQuestion = new Question(1L,"title1",1L,"content1",0L,null,null,0L);
+        Question curQuestion = new Question(1L,"title1",1L,"content1",0L,null,null,0L, 0L);
 
         doNothing().when(questionService).deleteQuestion(curQuestion.getQuestionId());
 

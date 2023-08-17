@@ -36,6 +36,7 @@ public interface ReplyMapper {
         replyResponseDto.memberId( reply.getMemberId() );
         replyResponseDto.content( reply.getContent() );
         replyResponseDto.createdAt( reply.getCreatedAt() );
+        replyResponseDto.choice(reply.getChoice());
         replyResponseDto.comments( commentListToCommentResponseDtoList( reply.getComments() ) );
 
         return replyResponseDto.build();

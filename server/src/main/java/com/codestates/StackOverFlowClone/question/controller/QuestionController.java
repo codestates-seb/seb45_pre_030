@@ -68,9 +68,10 @@ public class QuestionController {
         Question response = questionService.findQuestion(questionId);
         questionService.increaseViewCount(response);
 
+        QuestionDto.Response questiontoresponse = mapper.questionToQuestionResponseDto(response);
 
         return new ResponseEntity<>(new SingleResponseDto(
-                mapper.questionToQuestionResponseDto(response))
+                questiontoresponse)
                 , HttpStatus.OK);
     }
 

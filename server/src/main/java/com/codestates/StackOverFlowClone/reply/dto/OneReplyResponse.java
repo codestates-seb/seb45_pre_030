@@ -8,4 +8,6 @@ public class OneReplyResponse {
     private long memberId;
     private String content;
     private LocalDateTime createdAt;
+    private long choice;
+
 }

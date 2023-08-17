@@ -26,4 +26,6 @@ public class QuestionResponseDto {
     private LocalDateTime  createdAt;
     private List<ReplyResponseDto> replies;
 
+    private long replyChoice;
+
 }
