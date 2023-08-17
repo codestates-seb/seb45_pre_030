@@ -11,6 +11,7 @@ import java.util.List;
 public class ReplyDto {
     @Getter
     @Setter
+    @AllArgsConstructor
     public static class Post {
         private long questionId;
 
@@ -24,6 +25,7 @@ public class ReplyDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
     public static class Patch {
         private long replyId;
 

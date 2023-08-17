@@ -7,7 +7,7 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: none  # (1) 스키마 자동 생성
+      ddl-auto: create  # (1) 스키마 자동 생성
     show-sql: true      # (2) SQL 쿼리 출력
     properties:
       hibernate:
@@ -17,8 +17,7 @@ spring:
         use_sql_comments: true
   sql:
     init:
-      schema-locations: classpath:schema.sql
-      data-locations: classpath:data.sql
+      data-locations: classpath*:db/h2/data.sql
 logging:
   level:
     org:
@@ -29,3 +28,10 @@ server:
   servlet:
     encoding:
       force-response: true
+mail:
+  address:
+    admin: admin@gmail.com
+jwt:
+  key: ${JWT_SECRET_KEY}               # 민감한 정보는 시스템 환경 변수에서 로드한다.
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420

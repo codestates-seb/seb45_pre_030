@@ -33,7 +33,6 @@ public class ReplyController {
     public ResponseEntity postReply(@PathVariable("question-id") @Positive long questionId,
                                     @Valid @RequestBody ReplyDto.Post requestBody) {
         requestBody.setQuestionId(questionId);
-
         Reply reply = mapper.ReplyPostDtoToReply(requestBody);
 
         Reply createdReply = replyService.createReply(reply);
