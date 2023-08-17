@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class ReplyDto {
     @Getter
     @Setter
+    @AllArgsConstructor
     public static class Post {
         private long questionId;
 
@@ -23,6 +24,7 @@ public class ReplyDto {
 
     @Getter
     @Setter
+    @AllArgsConstructor
     public static class Patch {
         private long replyId;
 
