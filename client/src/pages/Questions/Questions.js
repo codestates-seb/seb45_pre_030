@@ -3,6 +3,7 @@ import {
   Container,
   FilterWrapper,
   Section,
+  SectionContainer,
   SubContainer,
   SubWrapper,
   Title,
@@ -22,31 +23,35 @@ const dummydata = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 function Questions() {
   return (
     <Container>
-      <Nav />
-      <Section className="questions-main-section">
-        <TitleWrapper>
-          <Title>All Questions</Title>
-          <Link to="/ask">
-            <AskButton />
-          </Link>
-        </TitleWrapper>
-        <SubContainer>
-          <SubWrapper>
-            <Total>{dummydata.length} questions</Total>
-            <FilterWrapper>
-              <SortButton />
-              <FilterButton />
-            </FilterWrapper>
-          </SubWrapper>
-          <FilterOption />
-        </SubContainer>
-        {dummydata.map((data) => (
-          <Question key={data} />
-        ))}
-      </Section>
-      <Section className="questions-side-section">
-        <SideBar />
-      </Section>
+      <SectionContainer>
+        <Section className="questions-nav-section">
+          <Nav />
+        </Section>
+        <Section className="questions-main-section">
+          <TitleWrapper>
+            <Title>All Questions</Title>
+            <Link to="/ask">
+              <AskButton />
+            </Link>
+          </TitleWrapper>
+          <SubContainer>
+            <SubWrapper>
+              <Total>{dummydata.length} questions</Total>
+              <FilterWrapper>
+                <SortButton />
+                <FilterButton />
+              </FilterWrapper>
+            </SubWrapper>
+            <FilterOption />
+          </SubContainer>
+          {dummydata.map((data) => (
+            <Question key={data} />
+          ))}
+        </Section>
+        <Section className="questions-side-section">
+          <SideBar />
+        </Section>
+      </SectionContainer>
     </Container>
   );
 }
