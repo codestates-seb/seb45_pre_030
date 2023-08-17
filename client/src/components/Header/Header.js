@@ -1,7 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import Login from '../Login/Login';
-import Signup from '../Signup/Signup';
 import {
   Head,
   StyledLink,
@@ -26,13 +23,6 @@ function Header() {
         <QuestionInput type="text" placeholder="Search..." />
         <Nav>{login === true ? <LoginSuccess /> : <Loginfail />}</Nav>
       </Head>
-
-      {/* 라우터 */}
-      <Routes>
-        <Route path="/" element={<div>메인 페이지</div>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
     </>
   );
 }
