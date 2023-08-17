@@ -2,6 +2,7 @@ import AskButton from '../../components/questionList/AskButton/AskButton';
 import {
   Container,
   FilterWrapper,
+  Section,
   SubContainer,
   SubWrapper,
   Title,
@@ -19,7 +20,7 @@ const dummydata = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 function Questions() {
   return (
     <Container>
-      <div>
+      <Section className="questions-main-section">
         <TitleWrapper>
           <Title>All Questions</Title>
           <AskButton />
@@ -37,10 +38,10 @@ function Questions() {
         {dummydata.map((data) => (
           <Question key={data} />
         ))}
-      </div>
-      <div>
+      </Section>
+      <Section className="questions-side-section">
         <SideBar />
-      </div>
+      </Section>
     </Container>
   );
 }

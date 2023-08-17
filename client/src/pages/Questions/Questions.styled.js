@@ -5,6 +5,8 @@ export const Container = styled.div`
   padding: 24px;
 `;
 
+export const Section = styled.div``;
+
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
