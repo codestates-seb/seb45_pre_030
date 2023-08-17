@@ -12,23 +12,36 @@ export const Container = styled.nav`
 export const NavContainer = styled.ul``;
 
 export const NavWrapper = styled.li`
-  &.wrapper-withIcon {
-    padding: 8px 6px 8px 8px;
-  }
-
   > a {
     display: flex;
     align-items: center;
+  }
+
+  .link-withIcon {
+    padding: 8px 6px 8px 8px;
   }
 
   > a svg {
     margin-right: 6px;
     color: hsl(210, 8%, 55%);
   }
+
+  &.nav-selected {
+    background-color: hsl(210, 8%, 95%);
+    border-right: 3px solid hsl(27, 90%, 55%);
+
+    a svg {
+      color: hsl(210, 8%, 5%);
+    }
+
+    h2 {
+      color: hsl(210, 8%, 5%);
+      font-weight: bold;
+    }
+  }
 `;
 
 export const Text = styled.h2`
-  width: auto;
   &.nav-group {
     font-size: 11px;
     margin: 16px 0 4px 8px;
@@ -39,6 +52,10 @@ export const Text = styled.h2`
   &.nav-list {
     font-size: 13px;
     color: hsl(210, 8%, 35%);
+  }
+
+  &.nav-list:hover {
+    color: hsl(210, 8%, 15%);
   }
 
   &.nav-list-padding {

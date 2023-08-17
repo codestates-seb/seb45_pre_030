@@ -37,9 +37,9 @@ function Nav() {
         {nav.map((nav, idx) => (
           <NavWrapper
             key={nav.page}
-            className={idx === 0 && 'wrapper-withIcon'}
+            className={idx === 0 && 'wrapper-withIcon nav-selected'}
           >
-            <Link to={nav.adress}>
+            <Link to={nav.adress} className={idx === 0 && 'link-withIcon'}>
               {idx === 0 && <FontAwesomeIcon icon={faEarthAmericas} />}
               <Text className={`nav-list ${idx !== 0 && 'nav-list-padding'}`}>
                 {nav.page}
@@ -50,8 +50,8 @@ function Nav() {
         <NavWrapper>
           <Text className="nav-group">COLLECTIVES</Text>
         </NavWrapper>
-        <NavWrapper className="wrapper-withIcon">
-          <Link to="/">
+        <NavWrapper>
+          <Link to="/" className="link-withIcon">
             <FontAwesomeIcon icon={faAward} />
             <Text className="nav-list">Explore Collectives</Text>
           </Link>
