@@ -1,29 +1,34 @@
 import { useState } from 'react';
 import {
+  HeaderBox,
   Head,
   StyledLink,
   Nav,
   StyledNav,
   FontW,
   QuestionInput,
+  Bar,
+  Logo,
 } from './Header.styled';
 import userData from '../data/db';
+import LogoSrc from '/Users/leeseeun/seb45_pre_030/client/src/common/image/icon.png';
 
 function Header() {
   // 로그인 on/off
   const [login] = useState(false);
 
   return (
-    <>
+    <HeaderBox>
+      <Bar />
       <Head>
         <StyledLink to="/" style={{ textDecoration: 'none' }}>
-          {/* <Logo /> */}
+          <Logo src={LogoSrc} />
           stack<FontW>overflow</FontW>
         </StyledLink>
         <QuestionInput type="text" placeholder="Search..." />
         <Nav>{login === true ? <LoginSuccess /> : <Loginfail />}</Nav>
       </Head>
-    </>
+    </HeaderBox>
   );
 }
 
@@ -37,10 +42,10 @@ function Loginfail() {
   return (
     <>
       <StyledNav to="/login" style={{ textDecoration: 'none' }}>
-        Login
+        Log in
       </StyledNav>
       <StyledNav to="/signup" style={{ textDecoration: 'none' }}>
-        Signup
+        Sign up
       </StyledNav>
     </>
   );
