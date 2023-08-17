@@ -1,6 +1,7 @@
 package com.codestates.StackOverFlowClone.reply.entity;
 
 import com.codestates.StackOverFlowClone.comment.entity.Comment;
+import com.codestates.StackOverFlowClone.member.entity.Member;
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,8 +37,16 @@ public class Reply {
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "reply")
+    @OneToMany(mappedBy = "reply", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    @Column
+    private long choice;
+
+//    // Member 연결
+//    @ManyToOne
+//    @JoinColumn(name = "MEMBER_ID")
+//    private Member member;
   
     public Reply(Question question, long memberId, String content) {
         this.question = question;

@@ -24,4 +24,6 @@ public class OnlyQuestionResponseDto {
 
     private long viewCount;
 
+    private long replyChoice;
+
 }

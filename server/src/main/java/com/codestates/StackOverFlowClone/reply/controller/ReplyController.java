@@ -58,6 +58,22 @@ public class ReplyController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.ReplyToReplyResponseDto(reply)), HttpStatus.OK);
     }
 
+    @PatchMapping("{reply-id}/choice")
+    public ResponseEntity patchReplyChoice(@PathVariable("question-id") @Positive long questionId,
+                                           @PathVariable("reply-id") @Positive long replyId,
+                                           @Valid @RequestBody ReplyDto.Patch requestBody) {
+        requestBody.setReplyId(replyId);
+        requestBody.setQuestionId(questionId);
+
+        Reply reply = mapper.ReplyPatchDtoToReply(requestBody);
+
+        Reply choicedReply = replyService.updateReplyChoice(reply);
+
+        System.out.println("choice reply : "+choicedReply.getChoice());
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.ReplyToReplyResponseDto(choicedReply)), HttpStatus.OK);
+    }
+
     @GetMapping("/{reply-id}")
     public ResponseEntity getReply(@PathVariable("reply-id") @Positive long replyId) {
         Reply reply = replyService.findReply(replyId);

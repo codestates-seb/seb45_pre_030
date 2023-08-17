@@ -3,6 +3,7 @@ package com.codestates.StackOverFlowClone.question.service;
 
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.question.repository.QuestionRepository;
+import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import com.codestates.StackOverFlowClone.utils.CustomBeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,12 +49,24 @@ public class QuestionService {
 
         Question findQuestion = optionalQuestion.orElseThrow(()->new RuntimeException());
 
+        for(Reply reply : findQuestion.getReplies()){
+            if(reply.getChoice() == 1) findQuestion.setReplyChoice(1L);
+        }
+
         return findQuestion;
     }
 
     public Page<Question> findQuestions(int page, int size){
 
-        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").ascending()));
+        Page<Question> pageQuestion = questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").ascending()));
+
+        for(Question question : pageQuestion){
+            for(Reply reply : question.getReplies()){
+                if(reply.getChoice() == 1) question.setReplyChoice(1L);
+            }
+        }
+
+        return pageQuestion;
 
     }
 
