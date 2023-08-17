@@ -36,8 +36,15 @@ public class Reply {
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+
     @OneToMany(mappedBy = "reply")
     private List<Comment> comments = new ArrayList<>();
+
+    public Reply(Question question, long memberId, String content) {
+        this.question = question;
+        this.memberId = memberId;
+        this.content = content;
+    }
 
 }
 

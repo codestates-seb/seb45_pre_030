@@ -3,6 +3,7 @@ package com.codestates.StackOverFlowClone.reply.mapper;
 import com.codestates.StackOverFlowClone.comment.dto.CommentResponseDto;
 import com.codestates.StackOverFlowClone.comment.entity.Comment;
 import com.codestates.StackOverFlowClone.question.entity.Question;
+import com.codestates.StackOverFlowClone.question.mapper.QuestionMapper;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyResponseDto;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
