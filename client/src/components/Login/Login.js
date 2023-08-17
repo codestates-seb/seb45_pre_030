@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import userData from '../data/db';
 import { useNavigate } from 'react-router-dom';
-import { From, Head, Label, Input, Button, StyledNav } from './Login.styled';
+import {
+  From,
+  Label,
+  Input,
+  Button,
+  StyledNav,
+  EmailText,
+  Text,
+  Logo,
+} from './Login.styled';
+import LogoSrc from '/Users/leeseeun/seb45_pre_030/client/src/common/image/icon.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -10,8 +20,21 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // 오류텍스트 상태저장
+  const [emailText, setEmailText] = useState('');
+
+  // 이메일 정규식
+  const emailRegEx =
+    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+
   const onEmailHandler = (e) => {
     setEmail(e.target.value);
+    // 만약 이메일 형식이 아니면 설명글 보이기
+    if (emailRegEx.test(email) === false) {
+      setEmailText('null');
+    } else {
+      setEmailText('none');
+    }
   };
   const onPasswordHandler = (e) => {
     setPassword(e.target.value);
@@ -33,30 +56,35 @@ function Login() {
   };
 
   return (
-    <From>
-      <Head>로그인</Head>
+    <>
+      <Logo src={LogoSrc} />
+      <From>
+        <Label>Email</Label>
+        <Input
+          type="email"
+          placeholder="이메일 입력"
+          onChange={onEmailHandler}
+        />
+        <EmailText emailText={emailText}>
+          The email is not a valid email address.
+        </EmailText>
 
-      <Label>이메일</Label>
-      <Input
-        type="email"
-        placeholder="이메일을 입력"
-        onChange={onEmailHandler}
-      />
+        <Label>Password</Label>
+        <Input
+          type="password"
+          placeholder="비밀번호 입력"
+          onChange={onPasswordHandler}
+        />
 
-      <Label>비밀번호</Label>
-      <Input
-        type="password"
-        placeholder="비밀번호 입력"
-        onChange={onPasswordHandler}
-      />
-
-      <Button type="submit" onClick={onSubmitHandler}>
-        로그인
-      </Button>
+        <Button type="submit" onClick={onSubmitHandler}>
+          Log in
+        </Button>
+      </From>
       <StyledNav to="/signup" style={{ textDecoration: 'none' }}>
-        회원가입
+        <Text>Dont have an account? </Text>
+        Sign up
       </StyledNav>
-    </From>
+    </>
   );
 }
 
