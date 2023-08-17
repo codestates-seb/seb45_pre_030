@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  justify-content: center;
   padding: 24px;
+  max-width: 1264px;
 `;
 
 export const Section = styled.div``;
