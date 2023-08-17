@@ -15,6 +15,7 @@ import FilterOption from '../../components/questionList/FilterOption/FilterOptio
 import Question from '../../components/questionList/Question/Question';
 import SortButton from '../../components/questionList/SortButton/SortButton';
 import Nav from '../../components/Nav/Nav';
+import { Link } from 'react-router-dom';
 
 const dummydata = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
@@ -25,7 +26,9 @@ function Questions() {
       <Section className="questions-main-section">
         <TitleWrapper>
           <Title>All Questions</Title>
-          <AskButton />
+          <Link to="/ask">
+            <AskButton />
+          </Link>
         </TitleWrapper>
         <SubContainer>
           <SubWrapper>
