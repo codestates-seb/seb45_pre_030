@@ -35,6 +35,9 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
+        if(!requestBody.getPassword().equals(requestBody.getConfirmPassword()))
+            throw new RuntimeException();
+
         Member member = mapper.memberPostToMember(requestBody);
 
         Member createdMember = memberService.createMember(member);
