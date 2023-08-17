@@ -37,9 +37,9 @@ public class CommentService {
         return commentRepository.save(updatedComment);
     }
 
-//    public Comment findComment(long commentId) {
-//
-//    }
+    public Comment findComment(long commentId) {
+        return verifyExistComment(commentId);
+    }
 
     public List<Comment> findCommentsInReply(long replyId) {
         Reply reply = replyService.findReply(replyId);
