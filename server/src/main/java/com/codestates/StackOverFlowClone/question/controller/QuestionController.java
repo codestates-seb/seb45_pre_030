@@ -58,8 +58,7 @@ public class QuestionController {
 
         Question response = questionService.updateQuestion(question);
 
-        return new ResponseEntity<>(
-                mapper.questionToOnlyQuestionResponseDto(response)
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToOnlyQuestionResponseDto(response))
                 , HttpStatus.OK);
     }
 

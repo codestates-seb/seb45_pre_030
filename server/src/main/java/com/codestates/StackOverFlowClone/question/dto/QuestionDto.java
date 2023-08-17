@@ -1,8 +1,11 @@
 package com.codestates.StackOverFlowClone.question.dto;
 
 import com.codestates.StackOverFlowClone.reply.dto.ReplyResponseDto;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +15,7 @@ import java.util.List;
 public class QuestionDto {
     @Getter
     @Setter
+    @NoArgsConstructor
     public static class Post {
         @Size(max = 100)
         private String title;
@@ -31,6 +35,7 @@ public class QuestionDto {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     public static class Patch {
 
         private long questionId;
@@ -40,6 +45,8 @@ public class QuestionDto {
 
         @Size(max = 1000)
         private String content;
+
+        private long memberId;
 
         private Long viewCount;
 
