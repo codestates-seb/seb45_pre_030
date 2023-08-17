@@ -1,6 +1,7 @@
 package com.codestates.StackOverFlowClone.reply.mapper;
 
 import com.codestates.StackOverFlowClone.question.entity.Question;
+import com.codestates.StackOverFlowClone.question.mapper.QuestionMapper;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyPatchDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyPostDto;

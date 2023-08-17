@@ -34,6 +34,12 @@ public class Reply {
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    public Reply(Question question, long memberId, String content) {
+        this.question = question;
+        this.memberId = memberId;
+        this.content = content;
+    }
+
 }
 
 
