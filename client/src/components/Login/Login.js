@@ -20,7 +20,10 @@ function Login() {
   // 로그인 시도
   const onSubmitHandler = () => {
     // 유저 데이터에 있던 정보랑 내가 적은 정보가 같아야 로그인 성공함
-    if (email === userData[0].useremail && password === userData[0].pw) {
+    if (
+      email === userData[0].useremail &&
+      Number(password) === Number(userData[0].pw)
+    ) {
       alert('로그인 성공');
       navigate('/');
     } else {

@@ -40,7 +40,6 @@ function Signup() {
     if (emailRegEx.test(email) === false) {
       setEmailText('null');
     } else {
-      console.log('이메일 형식이 맞습니다');
       setEmailText('none');
     }
   };
@@ -67,7 +66,6 @@ function Signup() {
       // 메인 페이지로 이동
       navigate('/');
     } else {
-      console.log('비밀번호가 불일치 합니다.');
       setPasswordText('null');
     }
   };
