@@ -24,7 +24,6 @@ const nav = [
 
 function Nav() {
   const location = useLocation();
-
   return (
     <Container>
       <NavContainer>
