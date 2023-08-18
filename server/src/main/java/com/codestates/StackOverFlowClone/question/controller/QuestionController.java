@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/question")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class QuestionController {
 
     private final static String QUESTION_DEFAULT_URL = "/question";
