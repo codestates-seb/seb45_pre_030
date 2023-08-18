@@ -6,7 +6,7 @@ function Test() {
   const [fetchedData, setFetchedData] = useState(null);
 
   const fetchData = () => {
-    fetch('https://2927-39-117-8-218.ngrok-free.app/question/12', {
+    fetch('https://f0ca-39-117-8-218.ngrok-free.app/question/11', {
       method: 'GET',
       headers: {
         Origin: 'http://localhost:3000',
