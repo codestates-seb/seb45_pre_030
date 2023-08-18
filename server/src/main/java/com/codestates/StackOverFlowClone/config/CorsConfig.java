@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// 이 클래스 있으면 멤버생성시 오류
 @Configuration
 @EnableWebMvc
 public class CorsConfig implements WebMvcConfigurer {
