@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/stackoverflowdb
-    username: root
-    password: upp4!uup$1
+    url: jdbc:mysql://localhost:3306/${LOCAL_DB}
+    username: ${LOCAL_DB_USERNAME}
+    password: ${LOCAL_DB_PASSWORD}
   jpa:
     hibernate:
     show-sql: true      # (2) SQL 쿼리 출력
