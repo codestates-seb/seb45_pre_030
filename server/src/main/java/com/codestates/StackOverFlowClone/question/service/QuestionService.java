@@ -66,6 +66,8 @@ public class QuestionService {
             if(reply.getChoice() == 1) findQuestion.setReplyChoice(1L);
         }
 
+        findQuestion.setReplyCount(findQuestion.getReplies().size());
+
         return findQuestion;
     }
 
@@ -77,6 +79,10 @@ public class QuestionService {
             for(Reply reply : question.getReplies()){
                 if(reply.getChoice() == 1) question.setReplyChoice(1L);
             }
+        }
+
+        for(Question question : pageQuestion){
+            question.setReplyCount(question.getReplies().size());
         }
 
         return pageQuestion;

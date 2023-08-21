@@ -36,8 +36,6 @@ public interface QuestionMapper {
         OnlyQuestionResponseDto onlyQuestionResponseDto = questionToOnlyQuestionResponseDto(question);
         List<ReplyResponseDto> replyResponseDtos = getRepliesResponseDto(question);
 
-        onlyQuestionResponseDto.setReplyCount(replyResponseDtos.size());
-
         return new QuestionDto.Response(onlyQuestionResponseDto, replyResponseDtos);
     }
     default List<ReplyResponseDto> getRepliesResponseDto(Question question) {
@@ -72,7 +70,7 @@ public interface QuestionMapper {
                                 .commentId(comment.getCommentId())
                                 .content(comment.getContent())
                                 .memberId(comment.getMember().getMemberId())
-                                .memberName(comment.getMember().getName())
+                                .name(comment.getMember().getName())
                                 .createdAt(comment.getCreatedAt())
                                 .replyId(comment.getReply().getReplyId())
                                 .build();

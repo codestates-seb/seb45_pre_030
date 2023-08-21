@@ -80,7 +80,7 @@ public interface ReplyMapper {
         commentResponseDto.commentId( comment.getCommentId() );
         commentResponseDto.content( comment.getContent() );
         commentResponseDto.memberId(commentMember.getMemberId());
-        commentResponseDto.memberName(commentMember.getName());
+        commentResponseDto.name(commentMember.getName());
         commentResponseDto.replyId(comment.getReply().getReplyId());
         commentResponseDto.createdAt( comment.getCreatedAt() );
 

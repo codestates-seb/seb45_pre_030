@@ -12,7 +12,7 @@ public class CommentResponseDto {
     private long commentId;
     private long replyId;
     private long memberId;
-    private String memberName;
+    private String name;
     private String content;
 
     private LocalDateTime createdAt;

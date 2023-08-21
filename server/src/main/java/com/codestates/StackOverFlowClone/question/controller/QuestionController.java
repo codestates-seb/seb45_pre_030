@@ -48,7 +48,7 @@ public class QuestionController {
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
-        return ResponseEntity.created(location).body(mapper.questionToQuestionResponseDto(question));
+        return ResponseEntity.created(location).build();
 
     }
 
