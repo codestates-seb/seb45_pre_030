@@ -17,6 +17,7 @@ public class OnlyQuestionResponseDto {
     private String title;
 
     private long memberId;
+    private String name;
 
     private String content;
 

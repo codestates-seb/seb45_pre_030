@@ -24,9 +24,11 @@ public interface QuestionMapper {
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto);
 
     @Mapping(source = "member.memberId", target = "memberId")
+    @Mapping(source = "member.name", target = "name")
     OnlyQuestionResponseDto questionToOnlyQuestionResponseDto(Question question);
 
     @Mapping(source = "member.memberId", target = "memberId")
+    @Mapping(source = "member.name", target = "name")
     List<OnlyQuestionResponseDto> questionsToOnlyQuestionResponseDtos(List<Question> questions);
 
     default QuestionDto.Response questionToQuestionResponseDto(Question question) {
@@ -46,6 +48,7 @@ public interface QuestionMapper {
                                 .replyId(reply.getReplyId())
                                 .questionId(reply.getQuestion().getQuestionId())
                                 .memberId(reply.getMember().getMemberId())
+                                .name(reply.getMember().getName())
                                 .content(reply.getContent())
                                 .createdAt(reply.getCreatedAt())
                                 .comments(getCommentsResponseDto(reply))

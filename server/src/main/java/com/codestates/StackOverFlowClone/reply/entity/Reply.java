@@ -53,4 +53,5 @@ public class Reply {
         this.member = member;
         this.content = content;
     }
+
 }

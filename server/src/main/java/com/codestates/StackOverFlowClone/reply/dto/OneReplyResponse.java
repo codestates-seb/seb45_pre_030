@@ -6,6 +6,7 @@ public class OneReplyResponse {
     private long replyId;
     private long questionId;
     private long memberId;
+    private String name;
     private String content;
     private LocalDateTime createdAt;
     private long choice;

@@ -36,6 +36,7 @@ public interface ReplyMapper {
         replyResponseDto.questionId( replyQuestionQuestionId( reply ) );
         replyResponseDto.replyId( reply.getReplyId() );
         replyResponseDto.memberId( reply.getMember().getMemberId() );
+        replyResponseDto.name(reply.getMember().getName());
         replyResponseDto.content( reply.getContent() );
         replyResponseDto.createdAt( reply.getCreatedAt() );
         replyResponseDto.choice(reply.getChoice());

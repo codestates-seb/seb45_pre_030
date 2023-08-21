@@ -1,6 +1,8 @@
 package com.codestates.StackOverFlowClone.reply.service;
 
+import com.codestates.StackOverFlowClone.member.service.MemberService;
 import com.codestates.StackOverFlowClone.question.entity.Question;
+import com.codestates.StackOverFlowClone.question.repository.QuestionRepository;
 import com.codestates.StackOverFlowClone.question.service.QuestionService;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import com.codestates.StackOverFlowClone.reply.repository.ReplyRepository;
@@ -16,13 +18,19 @@ import java.util.Optional;
 public class ReplyService {
     private final ReplyRepository replyRepository;
     private final QuestionService questionService;
+    private final QuestionRepository questionRepository;
+    private final MemberService memberService;
     private final CustomBeanUtils<Reply> beanUtils;
 
     public ReplyService(ReplyRepository replyRepository,
                         QuestionService questionService,
+                        QuestionRepository questionRepository,
+                        MemberService memberService,
                         CustomBeanUtils<Reply> beanUtils) {
         this.replyRepository = replyRepository;
         this.questionService = questionService;
+        this.questionRepository = questionRepository;
+        this.memberService = memberService;
         this.beanUtils = beanUtils;
     }
 
@@ -38,11 +46,25 @@ public class ReplyService {
         Reply updatedReply =
                 beanUtils.copyNonNullProperties(reply, findReply);
 
+        // 본인만 답변 수정
+        long tokenMemberId = memberService.findTokenMemberId();
+        if(!isAuthenticatedMember(tokenMemberId, updatedReply.getMember().getMemberId())){
+            throw new RuntimeException();
+        }
+
         return replyRepository.save(updatedReply);
     }
 
     public Reply updateReplyChoice(Reply reply) {
         Reply findReply = findVerifiedReply(reply.getReplyId());
+
+        // 질문작성자만 선택가능
+        long tokenMemberId = memberService.findTokenMemberId();
+        long QuestionMemberId = questionRepository.findMemberIdById(findReply.getQuestion().getQuestionId());
+
+        if(!isAuthenticatedMember(tokenMemberId, QuestionMemberId)){
+            throw new RuntimeException();
+        }
 
         findReply.setChoice(1L);
 
@@ -64,6 +86,13 @@ public class ReplyService {
 
     public void deleteReply(long replyId) {
         Reply reply = findVerifiedReply(replyId);
+
+        // 본인만 답변 삭제
+        long tokenMemberId = memberService.findTokenMemberId();
+        if(!isAuthenticatedMember(tokenMemberId, reply.getMember().getMemberId())){
+            throw new RuntimeException();
+        }
+
         replyRepository.delete(reply);
     }
 
@@ -84,5 +113,10 @@ public class ReplyService {
     public void verifyOverReplyCount(Question question) {
         if(question.getReplies().size() >= question.getReplyLimitCount())
             throw new RuntimeException();
+    }
+
+    public boolean isAuthenticatedMember(long tokenMemberId, long questionId){
+
+        return tokenMemberId == questionId;
     }
 }
