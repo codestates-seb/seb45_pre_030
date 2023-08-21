@@ -9,9 +9,7 @@ import {
   StyledNav,
   EmailText,
   Text,
-  Logo,
 } from './Login.styled';
-import LogoSrc from '/Users/leeseeun/seb45_pre_030/client/src/common/image/icon.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -57,7 +55,6 @@ function Login() {
 
   return (
     <>
-      <Logo src={LogoSrc} />
       <From>
         <Label>Email</Label>
         <Input
