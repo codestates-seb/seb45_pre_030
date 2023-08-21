@@ -1,5 +1,6 @@
 package com.codestates.StackOverFlowClone.comment.entity;
 
+import com.codestates.StackOverFlowClone.member.entity.Member;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,12 +21,12 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
-    @Column(nullable = false, updatable = false)
-    private long memberId;
+//    @Column(nullable = false, updatable = false)
+//    private long memberId;
 
     @ManyToOne
     @JoinColumn(name = "REPLY_ID")

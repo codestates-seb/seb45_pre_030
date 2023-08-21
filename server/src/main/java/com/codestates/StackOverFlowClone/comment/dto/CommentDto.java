@@ -1,10 +1,7 @@
 package com.codestates.StackOverFlowClone.comment.dto;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 public class CommentDto {
     @Getter
@@ -13,7 +10,16 @@ public class CommentDto {
         private long commentId;
         private long replyId;
         private long memberId;
+        private String memberName;
         private String content;
+
+        public Post(long commentId, long replyId, long memberId, String memberName, String content) {
+            this.commentId = commentId;
+            this.replyId = replyId;
+            this.memberId = memberId;
+            this.memberName = memberName;
+            this.content = content;
+        }
     }
     @Getter
     @Setter
@@ -21,16 +27,7 @@ public class CommentDto {
         private long commentId;
         private long replyId;
         private long memberId;
+        private String memberName;
         private String content;
-    }
-    @Getter
-    @NoArgsConstructor
-    public static class Response {
-        private long commentId;
-        private long replyId;
-        private long memberId;
-        private String content;
-        private LocalDateTime createdAt;
-
     }
 }

@@ -58,7 +58,8 @@ public interface QuestionMapper {
                         CommentResponseDto.builder()
                                 .commentId(comment.getCommentId())
                                 .content(comment.getContent())
-                                .memberId(comment.getMemberId())
+                                .memberId(comment.getMember().getMemberId())
+                                .memberName(comment.getMember().getName())
                                 .createdAt(comment.getCreatedAt())
                                 .replyId(comment.getReply().getReplyId())
                                 .build();
