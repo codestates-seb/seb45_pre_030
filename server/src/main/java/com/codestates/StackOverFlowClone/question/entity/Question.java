@@ -51,6 +51,9 @@ public class Question {
     @Transient
     private long replyChoice;
 
+    @Transient
+    private long replyCount;
+
 
 
 }

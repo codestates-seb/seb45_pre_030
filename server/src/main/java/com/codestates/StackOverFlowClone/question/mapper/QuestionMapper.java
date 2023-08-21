@@ -36,6 +36,8 @@ public interface QuestionMapper {
         OnlyQuestionResponseDto onlyQuestionResponseDto = questionToOnlyQuestionResponseDto(question);
         List<ReplyResponseDto> replyResponseDtos = getRepliesResponseDto(question);
 
+        onlyQuestionResponseDto.setReplyCount(replyResponseDtos.size());
+
         return new QuestionDto.Response(onlyQuestionResponseDto, replyResponseDtos);
     }
     default List<ReplyResponseDto> getRepliesResponseDto(Question question) {

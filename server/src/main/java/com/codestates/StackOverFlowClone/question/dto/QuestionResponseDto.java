@@ -28,4 +28,6 @@ public class QuestionResponseDto {
 
     private long replyChoice;
 
+    private long replyCount;
+
 }
