@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const QuestionContainer = styled.div`
-  /* height: 1700px; */
+  height: 1700px;
   width: 1250px;
   display: block;
   margin: 0 auto;
