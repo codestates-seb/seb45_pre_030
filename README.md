@@ -23,3 +23,11 @@ BE: 신선호, 오동석, 이호연, 홍지원
 | test | 테스트 코드 |
 | docs | 문서명 수정 |
 | chore | 빌드 업무 수정 |
+
+## merge 규칙 
+
+1. 개인 브랜치에서 푸시
+2. feDev, beDev로 pull Request
+3. feDev, beDev로 pull Request 이후 코드 리뷰
+4. 문제 없으면 merge
+
