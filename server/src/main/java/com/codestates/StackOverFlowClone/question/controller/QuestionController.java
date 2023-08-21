@@ -38,7 +38,10 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post requestBody){
 
+        System.out.println("requ : "+requestBody.getMemberId());
         Question questionmapper = mapper.questionPostDtoToQuestion(requestBody);
+
+        System.out.println("mapper : "+questionmapper.getMember().getMemberId());
 
         Question question = questionService.createQuestion(questionmapper);
 

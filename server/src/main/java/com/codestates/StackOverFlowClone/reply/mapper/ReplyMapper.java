@@ -16,8 +16,10 @@ import java.util.List;
 public interface ReplyMapper {
 
     @Mapping(source = "questionId", target = "question.questionId")
+    @Mapping(source = "memberId", target = "member.memberId")
     Reply ReplyPostDtoToReply(ReplyDto.Post replyPostDto);
     @Mapping(source = "questionId", target = "question.questionId")
+    @Mapping(source = "memberId", target = "member.memberId")
     Reply ReplyPatchDtoToReply(ReplyDto.Patch replyPatchDto);
 //    @Mapping(source = "question.questionId", target = "questionId")
 //    ReplyResponseDto ReplyToReplyResponseDto(Reply reply);
@@ -33,7 +35,8 @@ public interface ReplyMapper {
 
         replyResponseDto.questionId( replyQuestionQuestionId( reply ) );
         replyResponseDto.replyId( reply.getReplyId() );
-        replyResponseDto.memberId( reply.getMemberId() );
+        replyResponseDto.memberId( reply.getMember().getMemberId() );
+        replyResponseDto.name(reply.getMember().getName());
         replyResponseDto.content( reply.getContent() );
         replyResponseDto.createdAt( reply.getCreatedAt() );
         replyResponseDto.choice(reply.getChoice());
