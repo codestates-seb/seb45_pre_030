@@ -2,8 +2,8 @@ package com.codestates.StackOverFlowClone.reply.mapper;
 
 import com.codestates.StackOverFlowClone.comment.dto.CommentResponseDto;
 import com.codestates.StackOverFlowClone.comment.entity.Comment;
+import com.codestates.StackOverFlowClone.member.entity.Member;
 import com.codestates.StackOverFlowClone.question.entity.Question;
-import com.codestates.StackOverFlowClone.question.mapper.QuestionMapper;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyResponseDto;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
@@ -73,10 +73,11 @@ public interface ReplyMapper {
         }
 
         CommentResponseDto.CommentResponseDtoBuilder commentResponseDto = CommentResponseDto.builder();
-
+        Member commentMember = comment.getMember();
         commentResponseDto.commentId( comment.getCommentId() );
         commentResponseDto.content( comment.getContent() );
-        commentResponseDto.memberId(comment.getMemberId());
+        commentResponseDto.memberId(commentMember.getMemberId());
+        commentResponseDto.memberName(commentMember.getName());
         commentResponseDto.replyId(comment.getReply().getReplyId());
         commentResponseDto.createdAt( comment.getCreatedAt() );
 

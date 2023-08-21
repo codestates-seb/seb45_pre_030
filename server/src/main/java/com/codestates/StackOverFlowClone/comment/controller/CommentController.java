@@ -4,9 +4,8 @@ import com.codestates.StackOverFlowClone.comment.dto.CommentDto;
 import com.codestates.StackOverFlowClone.comment.entity.Comment;
 import com.codestates.StackOverFlowClone.comment.mapper.CommentMapper;
 import com.codestates.StackOverFlowClone.comment.service.CommentService;
-import com.codestates.StackOverFlowClone.reply.entity.Reply;
+import com.codestates.StackOverFlowClone.member.service.MemberService;
 import com.codestates.StackOverFlowClone.response.SingleResponseDto;
-import com.codestates.StackOverFlowClone.utils.UriCreator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.*;
@@ -23,15 +22,18 @@ public class CommentController {
     private final static String COMMENT_DEFAULT_URL = "/question/{question-id}/reply/{reply-id}/comment";
     private final CommentService commentService;
     private final CommentMapper mapper;
+    private final MemberService memberService;
 
-    public CommentController(CommentService commentService, CommentMapper mapper) {
+    public CommentController(CommentService commentService, CommentMapper mapper, MemberService memberService) {
         this.commentService = commentService;
         this.mapper = mapper;
+        this.memberService = memberService;
     }
 
     @PostMapping
     public ResponseEntity postComment(@Valid @RequestBody CommentDto.Post requestBody,
                                       @PathVariable("question-id") @Positive long questionId,@PathVariable("reply-id") @Positive long replyId) {
+        requestBody.setMemberId(memberService.findTokenMemberId());
         requestBody.setReplyId(replyId);
         Comment comment = mapper.commentPostDtoToComment(requestBody);
         Comment response = commentService.createComment(comment);
