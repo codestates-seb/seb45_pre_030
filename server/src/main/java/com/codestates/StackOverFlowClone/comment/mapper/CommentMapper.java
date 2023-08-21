@@ -12,8 +12,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
     @Mapping(source = "replyId", target = "reply.replyId")
+    @Mapping(source = "memberId", target = "member.memberId")
     Comment commentPostDtoToComment(CommentDto.Post commentPostDto);
     @Mapping(source = "replyId", target = "reply.replyId")
+    @Mapping(source = "memberId", target = "member.memberId")
     Comment commentPatchDtoToComment(CommentDto.Patch commentPatchDto);
 
     default CommentResponseDto commentToCommentResponseDto(Comment comment) {
@@ -23,7 +25,7 @@ public interface CommentMapper {
 
         long commentId = comment.getCommentId();
         long replyId = comment.getReply().getReplyId();
-        long memberId = comment.getMemberId();
+        long memberId = comment.getMember().getMemberId();
         String CommentContent = comment.getContent();
         LocalDateTime createdAt = comment.getCreatedAt();
 

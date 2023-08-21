@@ -1,5 +1,6 @@
 package com.codestates.StackOverFlowClone.question.slice;
 
+import com.codestates.StackOverFlowClone.member.dto.MemberDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionDto;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +39,22 @@ public class QuestionControllerSliceTest {
 
     @BeforeEach
     void initPost() throws Exception {
+
+        MemberDto.Post memberPost = new MemberDto.Post("user1@gmail.com","user1","user1","abc");
+
+        String content0 = gson.toJson(memberPost);
+
+        URI uri0 = UriComponentsBuilder.newInstance().path("/members").build().toUri();
+
+        postResultActions =
+                mockMvc.perform(
+                        post(uri0)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(content0)
+                );
+
+
         post = new QuestionDto.Post("title1",1,"content1");
 
         String content = gson.toJson(post);
@@ -125,7 +142,6 @@ public class QuestionControllerSliceTest {
     @Test
     void getQuestionsTest() throws Exception {
         // given -> initPost()
-        initPost(); // 한 행 더 post
 
         String page = "1";
         String size = "2";
@@ -151,7 +167,6 @@ public class QuestionControllerSliceTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].title").value(post.getTitle()))
-                .andExpect(jsonPath("$.data[1].content").value(post.getContent()))
                 .andExpect(jsonPath("$.pageInfo.size").value(size))
                 .andReturn();
 

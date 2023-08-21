@@ -9,17 +9,24 @@ import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyResponseDto;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
+
+    @Mapping(source = "memberId", target = "member.memberId")
     Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto);
+
+    @Mapping(source = "memberId", target = "member.memberId")
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto);
 
+    @Mapping(source = "member.memberId", target = "memberId")
     OnlyQuestionResponseDto questionToOnlyQuestionResponseDto(Question question);
 
+    @Mapping(source = "member.memberId", target = "memberId")
     List<OnlyQuestionResponseDto> questionsToOnlyQuestionResponseDtos(List<Question> questions);
 
     default QuestionDto.Response questionToQuestionResponseDto(Question question) {
@@ -38,7 +45,7 @@ public interface QuestionMapper {
                         ReplyResponseDto.builder()
                                 .replyId(reply.getReplyId())
                                 .questionId(reply.getQuestion().getQuestionId())
-                                .memberId(reply.getMemberId())
+                                .memberId(reply.getMember().getMemberId())
                                 .content(reply.getContent())
                                 .createdAt(reply.getCreatedAt())
                                 .comments(getCommentsResponseDto(reply))
@@ -58,7 +65,7 @@ public interface QuestionMapper {
                         CommentResponseDto.builder()
                                 .commentId(comment.getCommentId())
                                 .content(comment.getContent())
-                                .memberId(comment.getMemberId())
+                                .memberId(comment.getMember().getMemberId())
                                 .createdAt(comment.getCreatedAt())
                                 .replyId(comment.getReply().getReplyId())
                                 .build();
