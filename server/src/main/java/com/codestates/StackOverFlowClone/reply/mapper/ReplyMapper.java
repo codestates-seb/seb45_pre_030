@@ -18,8 +18,8 @@ public interface ReplyMapper {
     @Mapping(source = "questionId", target = "question.questionId")
     @Mapping(source = "memberId", target = "member.memberId")
     Reply ReplyPostDtoToReply(ReplyDto.Post replyPostDto);
+    
     @Mapping(source = "questionId", target = "question.questionId")
-    @Mapping(source = "memberId", target = "member.memberId")
     Reply ReplyPatchDtoToReply(ReplyDto.Patch replyPatchDto);
 //    @Mapping(source = "question.questionId", target = "questionId")
 //    ReplyResponseDto ReplyToReplyResponseDto(Reply reply);
