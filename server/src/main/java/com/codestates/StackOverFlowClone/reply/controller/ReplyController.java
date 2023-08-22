@@ -1,5 +1,6 @@
 package com.codestates.StackOverFlowClone.reply.controller;
 
+import com.codestates.StackOverFlowClone.member.service.MemberService;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyPatchDto;
 import com.codestates.StackOverFlowClone.reply.dto.ReplyPostDto;
@@ -23,15 +24,19 @@ import java.net.URI;
 public class ReplyController {
     private final static String REPLY_DEFAULT_URL = "/question/{question-id}/reply";
     private final ReplyService replyService;
+    private final MemberService memberService;
     private final ReplyMapper mapper;
 
-    public ReplyController(ReplyService replyService, ReplyMapper mapper) {
+    public ReplyController(ReplyService replyService, ReplyMapper mapper, MemberService memberService) {
         this.replyService = replyService;
         this.mapper = mapper;
+        this.memberService = memberService;
     }
     @PostMapping
     public ResponseEntity postReply(@PathVariable("question-id") @Positive long questionId,
                                     @Valid @RequestBody ReplyDto.Post requestBody) {
+        requestBody.setMemberId(memberService.findTokenMemberId());
+
         requestBody.setQuestionId(questionId);
         Reply reply = mapper.ReplyPostDtoToReply(requestBody);
 

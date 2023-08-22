@@ -10,14 +10,14 @@ public class CommentDto {
         private long commentId;
         private long replyId;
         private long memberId;
-        private String memberName;
+        private String name;
         private String content;
 
-        public Post(long commentId, long replyId, long memberId, String memberName, String content) {
+        public Post(long commentId, long replyId, long memberId, String name, String content) {
             this.commentId = commentId;
             this.replyId = replyId;
             this.memberId = memberId;
-            this.memberName = memberName;
+            this.name = name;
             this.content = content;
         }
     }
@@ -27,7 +27,7 @@ public class CommentDto {
         private long commentId;
         private long replyId;
         private long memberId;
-        private String memberName;
+        private String name;
         private String content;
     }
 }

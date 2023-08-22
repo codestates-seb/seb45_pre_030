@@ -24,12 +24,12 @@ public interface CommentMapper {
         long commentId = comment.getCommentId();
         long replyId = comment.getReply().getReplyId();
         long memberId = comment.getMember().getMemberId();
-        String memberName = comment.getMember().getName();
+        String name = comment.getMember().getName();
         String CommentContent = comment.getContent();
         LocalDateTime createdAt = comment.getCreatedAt();
 
         CommentResponseDto response = new CommentResponseDto(
-                commentId, replyId, memberId, memberName, CommentContent, createdAt);
+                commentId, replyId, memberId, name, CommentContent, createdAt);
 
         return response;
     }

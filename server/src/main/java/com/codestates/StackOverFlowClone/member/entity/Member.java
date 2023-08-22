@@ -29,14 +29,14 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String name;
 
-//    @OneToMany(mappedBy = "member" )
-//    private List<Question> questions = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "member" )
-//    private List<Reply> replies = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "member" )
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "member" )
+    private List<Question> questions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member" )
+    private List<Reply> replies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member" )
+    private List<Comment> comments = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();

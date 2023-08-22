@@ -1,6 +1,9 @@
 package com.codestates.StackOverFlowClone.question.service;
 
 
+import com.codestates.StackOverFlowClone.exception.BusinessLogicException;
+import com.codestates.StackOverFlowClone.exception.ExceptionCode;
+import com.codestates.StackOverFlowClone.member.service.MemberService;
 import com.codestates.StackOverFlowClone.question.entity.Question;
 import com.codestates.StackOverFlowClone.question.repository.QuestionRepository;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
@@ -8,6 +11,7 @@ import com.codestates.StackOverFlowClone.utils.CustomBeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,10 +23,13 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
+    private final MemberService memberService;
+
     private final CustomBeanUtils<Question> beanUtils;
 
-    public QuestionService(QuestionRepository questionRepository, CustomBeanUtils<Question> beanUtils){
+    public QuestionService(QuestionRepository questionRepository, MemberService memberService, CustomBeanUtils<Question> beanUtils){
         this.questionRepository = questionRepository;
+        this.memberService = memberService;
         this.beanUtils = beanUtils;
     }
 
@@ -39,6 +46,12 @@ public class QuestionService {
         Question updatingQuestion =
                 beanUtils.copyNonNullProperties(question, findQuestion);
 
+        // 본인만 게시물 수정
+        long tokenMemberId = memberService.findTokenMemberId();
+        if(!isAuthenticatedMember(tokenMemberId, updatingQuestion.getMember().getMemberId())){
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+        }
+
         return questionRepository.save(updatingQuestion);
     }
 
@@ -53,6 +66,8 @@ public class QuestionService {
             if(reply.getChoice() == 1) findQuestion.setReplyChoice(1L);
         }
 
+        findQuestion.setReplyCount(findQuestion.getReplies().size());
+
         return findQuestion;
     }
 
@@ -64,6 +79,10 @@ public class QuestionService {
             for(Reply reply : question.getReplies()){
                 if(reply.getChoice() == 1) question.setReplyChoice(1L);
             }
+        }
+
+        for(Question question : pageQuestion){
+            question.setReplyCount(question.getReplies().size());
         }
 
         return pageQuestion;
@@ -79,6 +98,18 @@ public class QuestionService {
 
         Question findQuestion = findQuestion(questionId);
 
+        // 본인만 게시물 삭제
+        long tokenMemberId = memberService.findTokenMemberId();
+        if(!isAuthenticatedMember(tokenMemberId, findQuestion.getMember().getMemberId())){
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
+        }
+
         questionRepository.delete(findQuestion);
     }
+
+    public boolean isAuthenticatedMember(long tokenMemberId, long questionId){
+
+        return tokenMemberId == questionId;
+    }
+
 }
