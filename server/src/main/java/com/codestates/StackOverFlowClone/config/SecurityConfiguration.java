@@ -61,7 +61,16 @@ public class SecurityConfiguration {
                         .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
                         .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
                         .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER","ADMIN")
-                        .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
+                        .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
+                        .antMatchers(HttpMethod.POST, "/question").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.PATCH, "/question/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/question/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.POST, "/**/reply").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.PATCH, "/**/reply/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/**/reply/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.POST, "/**/comment").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.PATCH, "/**/comment/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.DELETE, "/**/comment/**").hasAnyRole("USER","ADMIN")
                         .anyRequest().permitAll()
                 );
         return http.build();

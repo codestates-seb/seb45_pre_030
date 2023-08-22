@@ -1,6 +1,8 @@
 package com.codestates.StackOverFlowClone.member.service;
 
 import com.codestates.StackOverFlowClone.auth.utils.CustomAuthorityUtils;
+import com.codestates.StackOverFlowClone.exception.BusinessLogicException;
+import com.codestates.StackOverFlowClone.exception.ExceptionCode;
 import com.codestates.StackOverFlowClone.member.entity.Member;
 import com.codestates.StackOverFlowClone.member.repository.MemberRepository;
 import com.codestates.StackOverFlowClone.reply.entity.Reply;
@@ -51,6 +53,7 @@ public class MemberService {
     }
 
     public Member updateMember(Member member) {
+        verifyEqualsTokenId(member.getMemberId());
         Member findMember = findVerifiedMember(member.getMemberId());
 
         Member updatedMember =
@@ -61,6 +64,7 @@ public class MemberService {
 
 
     public Member findMember(long memberId) {
+        verifyEqualsTokenId(memberId);
         return findVerifiedMember(memberId);
     }
 
@@ -70,6 +74,7 @@ public class MemberService {
     }
 
     public void deleteMember(long memberId) {
+        verifyEqualsTokenId(memberId);
         Member findMember = findVerifiedMember(memberId);
 
         memberRepository.delete(findMember);
@@ -93,5 +98,11 @@ public class MemberService {
     public Long findTokenMemberId() {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return memberRepository.findMemberIdByEmail(email);
+    }
+
+    private void verifyEqualsTokenId(long memberId) {
+        Long tokenId = findTokenMemberId();
+        if(tokenId!=memberId)
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
     }
 }
