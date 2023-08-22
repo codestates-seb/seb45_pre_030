@@ -82,14 +82,17 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:8080"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH","DELETE"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:8080/",
+                "http://localhost:3000/"
+        ));
+        configuration.setAllowedMethods(Arrays.asList(""));
+        configuration.setAllowedHeaders(Arrays.asList(""));
+        configuration.setExposedHeaders(Arrays.asList("*","Authorization","Refresh"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
