@@ -20,7 +20,7 @@ public interface QuestionMapper {
     @Mapping(source = "memberId", target = "member.memberId")
     Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto);
 
-    @Mapping(source = "memberId", target = "member.memberId")
+
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto);
 
     @Mapping(source = "member.memberId", target = "memberId")
