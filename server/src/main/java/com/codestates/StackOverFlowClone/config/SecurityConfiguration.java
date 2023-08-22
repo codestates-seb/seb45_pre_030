@@ -84,11 +84,10 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:8080",
-                "http://localhost:3000",
-                "http://ec2-3-34-4-96.ap-northeast-2.compute.amazonaws.com:8080"
+                "http://localhost:3000"
         ));
-        configuration.setAllowedMethods(Arrays.asList(""));
-        configuration.setAllowedHeaders(Arrays.asList(""));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("*","Authorization","Refresh"));
         configuration.setAllowCredentials(true);
 
