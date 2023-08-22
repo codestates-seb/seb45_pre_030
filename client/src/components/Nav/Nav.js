@@ -10,15 +10,15 @@ const nav = [
   },
   {
     page: 'Tags',
-    url: '/tags',
+    url: '/questions/1',
   },
   {
     page: 'Users',
-    url: '/users',
+    url: '/#',
   },
   {
     page: 'Companies',
-    url: '/companies',
+    url: '/#',
   },
 ];
 
@@ -38,11 +38,11 @@ function Nav() {
         {nav.map((nav, idx) => (
           <NavWrapper
             key={nav.page}
-            className={`${idx === 0 && 'wrapper-withIcon'} ${
+            className={`${idx === 0 ? 'wrapper-withIcon' : ''} ${
               location.pathname === nav.url ? 'nav-selected' : ''
             }`}
           >
-            <Link to={nav.url} className={idx === 0 && 'link-withIcon'}>
+            <Link to={nav.url} className={idx === 0 ? 'link-withIcon' : ''}>
               {idx === 0 && <FontAwesomeIcon icon={faEarthAmericas} />}
               <Text className={`nav-list ${idx !== 0 && 'nav-list-padding'}`}>
                 {nav.page}
@@ -55,10 +55,10 @@ function Nav() {
         </NavWrapper>
         <NavWrapper
           className={`${
-            location.pathname === '/collectives' && 'nav-selected'
+            location.pathname === '/collectives' ? 'nav-selected' : ''
           }`}
         >
-          <Link to="/collectives" className="link-withIcon">
+          <Link to="/#" className="link-withIcon">
             <FontAwesomeIcon icon={faAward} />
             <Text className="nav-list">Explore Collectives</Text>
           </Link>

@@ -45,7 +45,6 @@ function FilterOption() {
         dispatch(addFilterTag(tag));
       }
       e.target.value = '';
-      console.log(filterTagList);
     }
   };
 

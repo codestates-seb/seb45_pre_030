@@ -2,6 +2,7 @@ import AskButton from '../../components/questionList/AskButton/AskButton';
 import {
   Container,
   FilterWrapper,
+  QuestionList,
   Section,
   SectionContainer,
   SubContainer,
@@ -17,10 +18,32 @@ import Question from '../../components/questionList/Question/Question';
 import SortButton from '../../components/questionList/SortButton/SortButton';
 import Nav from '../../components/Nav/Nav';
 import { Link } from 'react-router-dom';
-
-const dummydata = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+import { useEffect } from 'react';
+import Paging from '../../components/questionList/Paging/Paging';
+import { fetchData } from '../../api/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage, setFetchedData } from '../../redux/actions';
 
 function Questions() {
+  const fetchedData = useSelector((state) => state.fetchedData);
+  const currentPage = useSelector((state) => state.currentPage);
+  const dispatch = useDispatch();
+  const pageSize = 15;
+
+  useEffect(() => {
+    fetchData(currentPage, pageSize)
+      .then((data) => {
+        dispatch(setFetchedData(data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [currentPage, dispatch]);
+
+  const handlePageChange = (pageNumber) => {
+    dispatch(setCurrentPage(pageNumber));
+  };
+
   return (
     <Container>
       <SectionContainer>
@@ -36,7 +59,7 @@ function Questions() {
           </TitleWrapper>
           <SubContainer>
             <SubWrapper>
-              <Total>{dummydata.length} questions</Total>
+              <Total>{fetchedData.pageInfo.totalElements} questions</Total>
               <FilterWrapper>
                 <SortButton />
                 <FilterButton />
@@ -44,9 +67,16 @@ function Questions() {
             </SubWrapper>
             <FilterOption />
           </SubContainer>
-          {dummydata.map((data) => (
-            <Question key={data} />
-          ))}
+          <QuestionList>
+            {fetchedData.data.map((data) => (
+              <Question key={data.questionId} data={data} />
+            ))}
+          </QuestionList>
+          <Paging
+            page={fetchedData.pageInfo}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
         </Section>
         <Section className="questions-side-section">
           <SideBar />

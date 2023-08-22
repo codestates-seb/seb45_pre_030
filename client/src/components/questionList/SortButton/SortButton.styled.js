@@ -7,7 +7,7 @@ export const Container = styled.div`
   border: 1px solid hsl(210, 8%, 75%);
   border-radius: 6px;
   overflow: hidden;
-  margin-right: 16px;
+  margin: 0 16px;
 `;
 
 export const Button = styled.button`
