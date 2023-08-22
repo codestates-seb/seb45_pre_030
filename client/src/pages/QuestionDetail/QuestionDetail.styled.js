@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: 600px;
 `;
 
 export const SectionContainer = styled.div`
@@ -90,6 +91,7 @@ export const Vote = styled.p`
 
 export const ContentTextWrapper = styled.div`
   padding-right: 16px;
+  min-width: 500px;
   max-width: 655px;
 `;
 

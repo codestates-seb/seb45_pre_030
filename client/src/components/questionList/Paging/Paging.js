@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Container, Page } from './Paging.styled';
 import { Link } from 'react-router-dom';
 
-function Paging({ page, onPageChange, currentPage }) {
+function Paging({ page, onPageChange, currentPageFromQueryParam }) {
   const totalPages = page.totalPages;
   const pageNumbers = [];
 
@@ -14,7 +14,16 @@ function Paging({ page, onPageChange, currentPage }) {
     <Container>
       {pageNumbers.map((el) => (
         <Link to={`/?page=${el}`} key={el} onClick={() => onPageChange(el)}>
-          <Page className={currentPage === el ? 'currentPage' : ''}>{el}</Page>
+          <Page
+            className={
+              (currentPageFromQueryParam === 0 && el == 1) ||
+              currentPageFromQueryParam === el
+                ? 'currentPage'
+                : ''
+            }
+          >
+            {el}
+          </Page>
         </Link>
       ))}
     </Container>
@@ -24,7 +33,7 @@ function Paging({ page, onPageChange, currentPage }) {
 Paging.propTypes = {
   page: PropTypes.object.isRequired,
   onPageChange: PropTypes.func.isRequired,
-  currentPage: PropTypes.number.isRequired,
+  currentPageFromQueryParam: PropTypes.number.isRequired,
 };
 
 export default Paging;

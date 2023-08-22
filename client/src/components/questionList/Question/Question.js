@@ -15,27 +15,18 @@ import {
   UserImg,
   UserInfo,
 } from './Question.styled';
+import { DateForm } from '../../../common/func';
 
 const dummydata = { tag: ['java', 'javascript', 'html', 'css'] };
 
-function formatDate(createdAt) {
-  const dateObj = new Date(createdAt);
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  const hours = String(dateObj.getHours()).padStart(2, '0');
-  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-  return `${year}/${month}/${day} ${hours}:${minutes}`;
-}
-
 function Question({ data }) {
-  const formattedDate = formatDate(data.createdAt);
+  const dateForm = DateForm(data.createdAt);
 
   return (
     <Container>
       <StatsContainer>
         <StatsItem>0 votes</StatsItem>
-        <StatsItem>0 answers</StatsItem>
+        <StatsItem>{data.replyCount} answers</StatsItem>
         <StatsItem>{data.viewCount} views</StatsItem>
       </StatsContainer>
       <ContentContainer>
@@ -57,9 +48,8 @@ function Question({ data }) {
             <UserImg src="logo192.png" />
             <UserInfo>
               <Text className="question-username">{data.memberId}</Text>
-              <Text className="question-award">0</Text>
             </UserInfo>
-            <Text className="question-time">asked {formattedDate}</Text>
+            <Text className="question-time">asked {dateForm}</Text>
           </UserCardContainer>
         </MetaContainer>
       </ContentContainer>

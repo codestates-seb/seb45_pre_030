@@ -28,35 +28,45 @@ import {
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { fetchQuestion } from '../../api/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFetchedQuestionData } from '../../redux/actions';
+import { DateForm } from '../../common/func';
 
 function QuestionDetail() {
   const questionId = useParams();
+  const fetchedQuestionData = useSelector((state) => state.fetchedQuestionData);
+  const dispatch = useDispatch();
   const [voteCount, setVoteCount] = useState(0);
-  const [questionData, setQuestionData] = useState([]);
 
   useEffect(() => {
-    fetchQuestion(questionId.id)
-      .then((question) => {
-        setQuestionData(question.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    if (questionId.id)
+      fetchQuestion(questionId.id)
+        .then((question) => {
+          dispatch(setFetchedQuestionData(question.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }, [dispatch, questionId.id]);
 
   const handleVoteUp = () => {
     setVoteCount(voteCount + 1);
-    console.log(questionData);
   };
 
   const handleVoteDown = () => {
     setVoteCount(voteCount - 1);
   };
 
+  if (!fetchedQuestionData.question) {
+    return <Container>Loading...</Container>; // 로딩 중 표시
+  }
+
+  const dateForm = DateForm(fetchedQuestionData.question.createdAt);
+
   const info = [
-    { type: 'Asked', value: 'today' },
-    { type: 'Modified', value: 'today' },
-    { type: 'Viewed', value: `1` },
+    { type: 'Asked', value: dateForm },
+    { type: 'Modified', value: dateForm },
+    { type: 'Viewed', value: fetchedQuestionData.question.viewCount },
   ];
 
   return (
@@ -65,7 +75,7 @@ function QuestionDetail() {
         <Nav />
         <ContentContainer>
           <Wrapper>
-            <Title>11</Title>
+            <Title>{fetchedQuestionData.question.title}</Title>
             <Link to="/ask">
               <AskButton />
             </Link>
@@ -91,23 +101,14 @@ function QuestionDetail() {
               </VoteWrapper>
               <ContentTextWrapper>
                 <ContentText>
-                  {`i have the below script which runs fine if i run it in it's
-                  current state but in a newer version of excel we have
-                  additional menus at the top of excel (Adobe and a few others)
-                  is there any way to force the menu to place at the last place
-                  possible on the right as currently (IMenuPos = 9 and iOffset =
-                  0) it's not populating the menu automatically as there is a
-                  menu item already in item 9. it also needs to ideally be the
-                  end of the menu not just +1 as other people in here have
-                  variable plugins in their excel which will then cause conflict
-                  so it will vary heavily any advice on this would be great.`}
+                  {fetchedQuestionData.question.content}
                 </ContentText>
                 <UserCardContainer>
                   <UserCard>
                     <Userimg src="/logo192.png" />
                     <UserInfoWrapper>
-                      <Username>Ethan Bradberry</Username>
-                      <UserDate>asked 1 hour ago</UserDate>
+                      <Username>{fetchedQuestionData.question.name}</Username>
+                      <UserDate>{dateForm}</UserDate>
                     </UserInfoWrapper>
                   </UserCard>
                 </UserCardContainer>

@@ -17,7 +17,7 @@ import FilterOption from '../../components/questionList/FilterOption/FilterOptio
 import Question from '../../components/questionList/Question/Question';
 import SortButton from '../../components/questionList/SortButton/SortButton';
 import Nav from '../../components/Nav/Nav';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Paging from '../../components/questionList/Paging/Paging';
 import { fetchQuestions } from '../../api/api';
@@ -29,6 +29,10 @@ function Questions() {
   const currentPage = useSelector((state) => state.currentPage);
   const dispatch = useDispatch();
   const pageSize = 15;
+
+  const location = useLocation(); // useLocation을 이용하여 현재 URL 정보 가져오기
+  const queryParams = new URLSearchParams(location.search);
+  const currentPageFromQueryParam = queryParams.get('page');
 
   useEffect(() => {
     fetchQuestions(currentPage, pageSize)
@@ -43,6 +47,7 @@ function Questions() {
   const handlePageChange = (pageNumber) => {
     dispatch(setCurrentPage(pageNumber));
   };
+  console.log(currentPageFromQueryParam);
 
   return (
     <Container>
@@ -75,7 +80,7 @@ function Questions() {
           <Paging
             page={fetchedData.pageInfo}
             onPageChange={handlePageChange}
-            currentPage={currentPage}
+            currentPageFromQueryParam={Number(currentPageFromQueryParam)}
           />
         </Section>
         <Section className="questions-side-section">
