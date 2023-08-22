@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const SectionContainer = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 1264px;
+  min-width: 1264px;
 `;
 
 export const Section = styled.div`
@@ -63,4 +63,10 @@ export const Total = styled.p`
 
 export const FilterWrapper = styled.div`
   display: flex;
+`;
+
+export const QuestionList = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 `;

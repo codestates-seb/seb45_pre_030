@@ -42,7 +42,7 @@ function CollectivesWidget() {
       {dummydata.map((data, idx) => (
         <Content key={idx}>
           <ContentWrapper>
-            <Image src={data.img} />
+            <Image src={`/${data.img}`} />
             <Item>
               <Hyper className="collectives-sub">{data.sub}</Hyper>
               <Text className="collectives-member">{data.member} Members</Text>

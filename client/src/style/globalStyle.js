@@ -58,6 +58,5 @@ export const GlobalStyle = createGlobalStyle`
   &.App {
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
 `;

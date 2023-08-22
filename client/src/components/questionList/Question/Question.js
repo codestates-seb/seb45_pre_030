@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Tag from '../Tag/Tag';
 import {
   Container,
@@ -7,7 +9,7 @@ import {
   StatsContainer,
   StatsItem,
   TagContainer,
-  Time,
+  Text,
   Title,
   UserCardContainer,
   UserImg,
@@ -16,17 +18,36 @@ import {
 
 const dummydata = { tag: ['java', 'javascript', 'html', 'css'] };
 
-function Question() {
+function formatDate(createdAt) {
+  const dateObj = new Date(createdAt);
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const hours = String(dateObj.getHours()).padStart(2, '0');
+  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+  return `${year}/${month}/${day} ${hours}:${minutes}`;
+}
+
+function Question({ data }) {
+  const formattedDate = formatDate(data.createdAt);
+
   return (
     <Container>
       <StatsContainer>
         <StatsItem>0 votes</StatsItem>
         <StatsItem>0 answers</StatsItem>
-        <StatsItem>2 views</StatsItem>
+        <StatsItem>{data.viewCount} views</StatsItem>
       </StatsContainer>
       <ContentContainer>
-        <Title>Coursera React lab cant compile React code</Title>
-        <Content>{`https://imanudin.net/2020/10/17/zimbra-tips-how-to-add-external-email-warning-message/ I have used this guide to set up my caution message but it doesn't seem to`}</Content>
+        <Link
+          to={{
+            pathname: `/questions/${data.questionId}`,
+            state: { questionData: data },
+          }}
+        >
+          <Title>{data.title}</Title>
+        </Link>
+        <Content>{data.content}</Content>
         <MetaContainer>
           <TagContainer>
             {dummydata.tag.map((data) => (
@@ -36,15 +57,19 @@ function Question() {
           <UserCardContainer>
             <UserImg src="logo192.png" />
             <UserInfo>
-              <a href="/">hermit</a>
-              <p>573</p>
+              <Text className="question-username">{data.memberId}</Text>
+              <Text className="question-award">0</Text>
             </UserInfo>
-            <Time>asked 55 secs ago</Time>
+            <Text className="question-time">asked {formattedDate}</Text>
           </UserCardContainer>
         </MetaContainer>
       </ContentContainer>
     </Container>
   );
 }
+
+Question.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default Question;
