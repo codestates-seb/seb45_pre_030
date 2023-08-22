@@ -25,25 +25,39 @@ import {
   Username,
   UserCardContainer,
 } from './QuestionDetail.styled';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-const info = [
-  { type: 'Asked', value: 'today' },
-  { type: 'Modified', value: 'today' },
-  { type: 'Viewed', value: '5 times' },
-];
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { fetchQuestion } from '../../api/api';
 
 function QuestionDetail() {
+  const questionId = useParams();
   const [voteCount, setVoteCount] = useState(0);
+  const [questionData, setQuestionData] = useState([]);
+
+  useEffect(() => {
+    fetchQuestion(questionId.id)
+      .then((question) => {
+        setQuestionData(question.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleVoteUp = () => {
     setVoteCount(voteCount + 1);
+    console.log(questionData);
   };
 
   const handleVoteDown = () => {
     setVoteCount(voteCount - 1);
   };
+
+  const info = [
+    { type: 'Asked', value: 'today' },
+    { type: 'Modified', value: 'today' },
+    { type: 'Viewed', value: `1` },
+  ];
 
   return (
     <Container>
@@ -51,10 +65,7 @@ function QuestionDetail() {
         <Nav />
         <ContentContainer>
           <Wrapper>
-            <Title>
-              Application.commandbars force new menu to the end of the
-              commandbar?
-            </Title>
+            <Title>11</Title>
             <Link to="/ask">
               <AskButton />
             </Link>

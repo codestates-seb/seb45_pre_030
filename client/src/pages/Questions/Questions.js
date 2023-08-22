@@ -20,7 +20,7 @@ import Nav from '../../components/Nav/Nav';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Paging from '../../components/questionList/Paging/Paging';
-import { fetchData } from '../../api/api';
+import { fetchQuestions } from '../../api/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setFetchedData } from '../../redux/actions';
 
@@ -31,7 +31,7 @@ function Questions() {
   const pageSize = 15;
 
   useEffect(() => {
-    fetchData(currentPage, pageSize)
+    fetchQuestions(currentPage, pageSize)
       .then((data) => {
         dispatch(setFetchedData(data));
       })

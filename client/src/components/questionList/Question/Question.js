@@ -42,7 +42,6 @@ function Question({ data }) {
         <Link
           to={{
             pathname: `/questions/${data.questionId}`,
-            state: { questionData: data },
           }}
         >
           <Title>{data.title}</Title>

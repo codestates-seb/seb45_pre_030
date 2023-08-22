@@ -3,6 +3,7 @@ export const ADD_FILTER_TAG = 'ADD_FILTER_TAG';
 export const DELETE_FILTER_TAG = 'DELETE_FILTER_TAG';
 export const SET_FETCHED_DATA = 'SET_FETCHED_DATA';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_FETCHED_QUESTION_DATA = 'SET_FETCHED_QUESTION_DATA';
 
 export const toggleFilterOption = () => ({
   type: TOGGLE_FILTER_OPTION,
@@ -26,4 +27,9 @@ export const setFetchedData = (data) => ({
 export const setCurrentPage = (pageNumber) => ({
   type: SET_CURRENT_PAGE,
   payload: pageNumber,
+});
+
+export const setFetchedQuestionData = (data) => ({
+  type: SET_FETCHED_QUESTION_DATA,
+  payload: data,
 });
