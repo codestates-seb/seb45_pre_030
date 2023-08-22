@@ -43,15 +43,14 @@ public class QuestionService {
 
         Question findQuestion = findQuestion(question.getQuestionId());
 
-
+        Question updatingQuestion =
+                beanUtils.copyNonNullProperties(question, findQuestion);
 
         // 본인만 게시물 수정
         long tokenMemberId = memberService.findTokenMemberId();
-        if(!isAuthenticatedMember(tokenMemberId, findQuestion.getMember().getMemberId())){
+        if(!isAuthenticatedMember(tokenMemberId, updatingQuestion.getMember().getMemberId())){
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
         }
-        Question updatingQuestion =
-                beanUtils.copyNonNullProperties(question, findQuestion);
 
         return questionRepository.save(updatingQuestion);
     }
