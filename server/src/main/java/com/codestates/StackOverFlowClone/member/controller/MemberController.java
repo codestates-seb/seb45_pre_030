@@ -50,6 +50,8 @@ public class MemberController {
     public ResponseEntity patchMember(
             @PathVariable("member-id") @Positive long memberId,
             @Valid @RequestBody MemberDto.Patch requestBody) {
+        if(!requestBody.getPassword().equals(requestBody.getConfirmPassword()))
+            throw new RuntimeException();
         requestBody.setMemberId(memberId);
 
         Member member =
