@@ -1,6 +1,7 @@
 package com.codestates.StackOverFlowClone.question.controller;
 
 
+import com.codestates.StackOverFlowClone.member.service.MemberService;
 import com.codestates.StackOverFlowClone.question.dto.QuestionDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionPatchDto;
 import com.codestates.StackOverFlowClone.question.dto.QuestionPostDto;
@@ -28,23 +29,26 @@ public class QuestionController {
 
     private final static String QUESTION_DEFAULT_URL = "/question";
     private final QuestionService questionService;
+    private final MemberService memberService;
     private final QuestionMapper mapper;
 
-    public QuestionController(QuestionService questionService, QuestionMapper mapper){
+    public QuestionController(QuestionService questionService, QuestionMapper mapper, MemberService memberService){
         this.questionService = questionService;
         this.mapper = mapper;
+        this.memberService = memberService;
     }
 
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post requestBody){
 
+        requestBody.setMemberId(memberService.findTokenMemberId());
         Question questionmapper = mapper.questionPostDtoToQuestion(requestBody);
 
         Question question = questionService.createQuestion(questionmapper);
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
-        return ResponseEntity.created(location).body(mapper.questionToQuestionResponseDto(question));
+        return ResponseEntity.created(location).build();
 
     }
 

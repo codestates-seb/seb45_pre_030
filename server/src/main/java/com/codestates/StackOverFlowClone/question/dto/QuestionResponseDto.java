@@ -16,10 +16,10 @@ public class QuestionResponseDto {
 
     private long questionId;
     private long memberId;
+    private String name;
 
     private String title;
 
-    private String writer;
 
     private String content;
 
@@ -27,5 +27,7 @@ public class QuestionResponseDto {
     private List<ReplyResponseDto> replies;
 
     private long replyChoice;
+
+    private long replyCount;
 
 }

@@ -26,8 +26,8 @@ public class Reply {
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
-    @Column(nullable = false, updatable = false)
-    private long memberId;
+//    @Column(nullable = false, updatable = false)
+//    private long memberId;
 
     @Lob
     @Column(nullable = false)
@@ -43,14 +43,15 @@ public class Reply {
     @Column
     private long choice;
 
-//    // Member 연결
-//    @ManyToOne
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
+    // Member 연결
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
   
-    public Reply(Question question, long memberId, String content) {
+    public Reply(Question question, Member member, String content) {
         this.question = question;
-        this.memberId = memberId;
+        this.member = member;
         this.content = content;
     }
+
 }
