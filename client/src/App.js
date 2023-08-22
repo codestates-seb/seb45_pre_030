@@ -6,6 +6,8 @@ import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
+import Signup from './components/Signup/Signup/Signup';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/questions/:id" element={<QuestionDetail />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </div>

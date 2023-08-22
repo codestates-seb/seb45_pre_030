@@ -2,15 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   From,
-  Head,
   Label,
   Input,
   Button,
   EmailText,
   PwText,
-} from './Signup.styled';
+} from './SignupFrom.styled';
 
-function Signup() {
+function SignupForm() {
   const navigate = useNavigate();
 
   // 이름, 이메일, 비밀번호, 확인비밀번호 저장
@@ -71,43 +70,46 @@ function Signup() {
   };
 
   return (
-    <From>
-      <Head>회원가입</Head>
+    <>
+      <From>
+        {/* 이름 입력 */}
+        <Label>Display name</Label>
+        <Input type="text" placeholder="이름 입력" onChange={onNameHandler} />
 
-      {/* 이름 입력 */}
-      <Label>이름</Label>
-      <Input type="text" placeholder="이름 입력" onChange={onNameHandler} />
+        {/* 이메일 형식인지 확인 */}
+        <Label>Email</Label>
+        <Input
+          type="email"
+          placeholder="이메일 입력"
+          onChange={onEmailHandler}
+        />
+        <EmailText emailText={emailText}>
+          The email is not a valid email address.
+        </EmailText>
 
-      {/* 이메일 형식인지 확인 */}
-      <Label>이메일</Label>
-      <Input type="email" placeholder="이메일 입력" onChange={onEmailHandler} />
-      <EmailText emailText={emailText}>
-        이메일 형식이 아닙니다. 다시 입력해 주세요
-      </EmailText>
+        {/* 비밀번호 일치/불일치 확인 */}
+        <Label>Password</Label>
+        <Input
+          type="password"
+          placeholder="비밀번호 입력"
+          onChange={onPasswordHandler}
+        />
 
-      {/* 비밀번호 일치/불일치 확인 */}
-      <Label>비밀번호</Label>
-      <Input
-        type="password"
-        placeholder="비밀번호 입력"
-        onChange={onPasswordHandler}
-      />
+        <Label>Confirm Password</Label>
+        <Input
+          type="password"
+          placeholder="비밀번호 재입력"
+          onChange={onConfirmPasswordHandler}
+        />
+        <PwText passwordText={passwordText}>
+          동일한 비밀번호를 입력해주세요
+        </PwText>
 
-      <Label>비밀번호 확인</Label>
-      <Input
-        type="password"
-        placeholder="비밀번호 재입력"
-        onChange={onConfirmPasswordHandler}
-      />
-      <PwText passwordText={passwordText}>
-        동일한 비밀번호를 입력해주세요
-      </PwText>
-
-      <Button type="submit" onClick={onSubmitHandler}>
-        회원가입
-      </Button>
-    </From>
+        <Button type="submit" onClick={onSubmitHandler}>
+          Sign up
+        </Button>
+      </From>
+    </>
   );
 }
-
-export default Signup;
+export default SignupForm;
