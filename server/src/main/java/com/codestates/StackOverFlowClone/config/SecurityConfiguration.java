@@ -84,7 +84,8 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:8080",
-                "http://localhost:3000"
+                "http://localhost:3000",
+                "http://seb-030-pre.s3-website.ap-northeast-2.amazonaws.com"
         ));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
