@@ -10,7 +10,7 @@ const nav = [
   },
   {
     page: 'Tags',
-    url: '/questions/1',
+    url: '/#',
   },
   {
     page: 'Users',

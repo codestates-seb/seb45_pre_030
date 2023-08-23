@@ -7,11 +7,13 @@ import Login from './components/Login/Login';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import Signup from './components/Signup/Signup/Signup';
 import Profile from './components/Profile/Profile';
+import { ScrollToTop } from './common/func';
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Questions />} />
         <Route path="/?page=:page" element={<Questions />} />

@@ -93,11 +93,6 @@ export const Text = styled.p`
     color: hsl(206, 100%, 52%);
   }
 
-  &.question-award {
-    color: hsl(210, 8%, 35%);
-    font-weight: 700;
-  }
-
   &.question-time {
     color: hsl(210, 8%, 45%);
   }

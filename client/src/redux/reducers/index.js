@@ -46,10 +46,7 @@ const currentPageReducer = (state = 1, action) => {
   }
 };
 
-const fetchedQuestionDataReducer = (
-  state = { question: {}, replies: [] },
-  action,
-) => {
+const fetchedQuestionDataReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_FETCHED_QUESTION_DATA:
       return action.payload;
