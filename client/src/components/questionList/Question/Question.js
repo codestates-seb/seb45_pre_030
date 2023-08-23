@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Tag from '../Tag/Tag';
 import {
   Container,
@@ -7,26 +9,35 @@ import {
   StatsContainer,
   StatsItem,
   TagContainer,
-  Time,
+  Text,
   Title,
   UserCardContainer,
   UserImg,
   UserInfo,
 } from './Question.styled';
+import { DateForm } from '../../../common/func';
 
 const dummydata = { tag: ['java', 'javascript', 'html', 'css'] };
 
-function Question() {
+function Question({ data }) {
+  const dateForm = DateForm(data.createdAt);
+
   return (
     <Container>
       <StatsContainer>
         <StatsItem>0 votes</StatsItem>
-        <StatsItem>0 answers</StatsItem>
-        <StatsItem>2 views</StatsItem>
+        <StatsItem>{data.replyCount} answers</StatsItem>
+        <StatsItem>{data.viewCount} views</StatsItem>
       </StatsContainer>
       <ContentContainer>
-        <Title>Coursera React lab cant compile React code</Title>
-        <Content>{`https://imanudin.net/2020/10/17/zimbra-tips-how-to-add-external-email-warning-message/ I have used this guide to set up my caution message but it doesn't seem to`}</Content>
+        <Link
+          to={{
+            pathname: `/questions/${data.questionId}`,
+          }}
+        >
+          <Title>{data.title}</Title>
+        </Link>
+        <Content>{data.content}</Content>
         <MetaContainer>
           <TagContainer>
             {dummydata.tag.map((data) => (
@@ -36,15 +47,18 @@ function Question() {
           <UserCardContainer>
             <UserImg src="logo192.png" />
             <UserInfo>
-              <a href="/">hermit</a>
-              <p>573</p>
+              <Text className="question-username">{data.memberId}</Text>
             </UserInfo>
-            <Time>asked 55 secs ago</Time>
+            <Text className="question-time">asked {dateForm}</Text>
           </UserCardContainer>
         </MetaContainer>
       </ContentContainer>
     </Container>
   );
 }
+
+Question.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default Question;

@@ -42,6 +42,7 @@ export const NavWrapper = styled.li`
 `;
 
 export const Text = styled.h2`
+  white-space: nowrap;
   &.nav-group {
     font-size: 11px;
     margin: 16px 0 4px 8px;

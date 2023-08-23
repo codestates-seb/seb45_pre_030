@@ -82,21 +82,18 @@ export const UserInfo = styled.div`
   display: flex;
   gap: 4px;
   margin-left: auto;
+`;
 
-  > a {
+export const Text = styled.p`
+  &.question-username {
     color: hsl(206, 100%, 40%);
   }
 
-  > a:hover {
+  &.question-username:hover {
     color: hsl(206, 100%, 52%);
   }
 
-  > p {
-    color: hsl(210, 8%, 35%);
-    font-weight: 700;
+  &.question-time {
+    color: hsl(210, 8%, 45%);
   }
-`;
-
-export const Time = styled.p`
-  color: hsl(210, 8%, 45%);
 `;
