@@ -47,7 +47,6 @@ function Questions() {
   const handlePageChange = (pageNumber) => {
     dispatch(setCurrentPage(pageNumber));
   };
-  console.log(currentPageFromQueryParam);
 
   return (
     <Container>

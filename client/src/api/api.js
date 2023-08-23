@@ -1,5 +1,5 @@
 const apiURL =
-  'http://ec2-54-180-90-145.ap-northeast-2.compute.amazonaws.com:8080';
+  'http://ec2-13-209-41-8.ap-northeast-2.compute.amazonaws.com:8080';
 
 export function fetchQuestions(page, size) {
   return fetch(`${apiURL}/question?page=${page}&size=${size}`, {
