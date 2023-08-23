@@ -47,7 +47,7 @@ function Question({ data }) {
           <UserCardContainer>
             <UserImg src="logo192.png" />
             <UserInfo>
-              <Text className="question-username">{data.memberId}</Text>
+              <Text className="question-username">{data.name}</Text>
             </UserInfo>
             <Text className="question-time">asked {dateForm}</Text>
           </UserCardContainer>
